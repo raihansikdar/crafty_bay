@@ -1,9 +1,38 @@
+import 'package:crafty_bay/presentation/ui/screens/auth/email_verification_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    goToNextPage();
+  }
+  void goToNextPage(){
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      Get.to(()=>const EmailVerificationScreen());
+    });
+  }
+
+  @override
+  void dispose() {
+    // Revert to the default system UI mode when disposing the splash screen
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
