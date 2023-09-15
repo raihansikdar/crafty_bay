@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   void goToNextPage(){
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Get.to(()=>const EmailVerificationScreen());
+      Get.offAll(()=> HomeScreen());
     });
   }
 
