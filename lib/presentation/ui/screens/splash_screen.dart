@@ -1,5 +1,4 @@
-import 'package:crafty_bay/presentation/ui/screens/auth/email_verification_screen.dart';
-import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   void goToNextPage(){
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Get.offAll(()=> HomeScreen());
+      Get.offAll(()=> MainBottomNavScreen());
     });
   }
 

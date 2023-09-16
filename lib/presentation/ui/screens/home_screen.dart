@@ -1,12 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
-import 'package:crafty_bay/presentation/ui/widgets/category_card.dart';
+import 'package:crafty_bay/presentation/ui/widgets/home/category_card.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/carousel_slider.dart';
 import 'package:crafty_bay/presentation/ui/widgets/circular_icon_button.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/home_section_title.dart';
+import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
    HomeScreen({Key? key}) : super(key: key);
@@ -71,21 +74,81 @@ class _HomeScreenState extends State<HomeScreen> {
               const CarouselSliderWidget(),
               SectionHeader(
                 title: 'All Category',
-                onTap: () {},
+                onTap: () {
+                  Get.to(()=> const CategoriesListScreen());
+                },
               ),
               SizedBox(
-                height: 100,
-                child: ListView.builder(
+                height: 110,
+                child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context,index){
-                      return const CategoryCard();
-                    },
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return const CategoryCard();
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      width: 16.0,
+                    );
+                  },
                 ),
               ),
               SectionHeader(
                 title: 'Popular',
                 onTap: () {},
+              ),
+              SizedBox(
+                height: 170,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return const ProductCard();
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      width: 16.0,
+                    );
+                  },
+                ),
+              ),
+              SectionHeader(
+                title: 'Special',
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 170,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return const ProductCard();
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      width: 16.0,
+                    );
+                  },
+                ),
+              ),
+              SectionHeader(
+                title: 'New',
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 170,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return const ProductCard();
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      width: 16.0,
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -94,6 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
 
 
 
