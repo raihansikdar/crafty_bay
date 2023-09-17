@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
+import 'package:crafty_bay/presentation/ui/utility/constants.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/category_card.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/carousel_slider.dart';
 import 'package:crafty_bay/presentation/ui/widgets/circular_icon_button.dart';
@@ -75,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
               SectionHeader(
                 title: 'All Category',
                 onTap: () {
-                  Get.to(()=> const CategoriesListScreen());
+                  Get.find<MainBottomNavController>().changeScreen(1);
+                 // Get.to(()=> const CategoriesListScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
                 },
               ),
               SizedBox(
@@ -95,7 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'Popular',
-                onTap: () {},
+                onTap: () {
+                  Get.to(()=>const ProductListScreen(),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                },
               ),
               SizedBox(
                 height: 170,
@@ -114,7 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'Special',
-                onTap: () {},
+                onTap: () {
+                  Get.to(()=>const ProductListScreen(),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                },
               ),
               SizedBox(
                 height: 170,
@@ -133,7 +141,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'New',
-                onTap: () {},
+                onTap: () {
+                  Get.to(()=>const ProductListScreen(),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                },
               ),
               SizedBox(
                 height: 170,
