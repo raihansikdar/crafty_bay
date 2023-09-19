@@ -1,7 +1,10 @@
+import 'package:crafty_bay/presentation/ui/screens/review_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
+import 'package:crafty_bay/presentation/ui/utility/constants.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({Key? key}) : super(key: key);
@@ -99,7 +102,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 ],
                               ),
                               TextButton(
-                                onPressed: () {  },
+                                onPressed: () {
+                                  Get.to(()=>const ReviewListScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
+                                },
                                 child: const Text(
                                   'Review',
                                   style: TextStyle(
