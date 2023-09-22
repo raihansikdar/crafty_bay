@@ -76,9 +76,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     letterSpacing: 0.5
                                 ),),
                               ),
-                              CustomStepper(lowerLimit: 1, upperLimit: 10, stepValue: 1, value: 1, onChange: ( newValue){
-                                print(newValue);
-                              })
+                              CustomStepper(
+                                  lowerLimit: 1,
+                                  upperLimit: 10,
+                                  stepValue: 1,
+                                  value: 1,
+                                  onChange: (newValue) {
+                                    print(newValue);
+                                  })
                             ],
                           ),
                           Row(
@@ -145,7 +150,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   return InkWell(
                                     borderRadius: BorderRadius.circular(16.0),
                                     onTap: (){
-                                      _selectedColorIndex =index;
+                                      _selectedColorIndex = index;
                                       if(mounted){
                                         setState(() {});
                                       }
