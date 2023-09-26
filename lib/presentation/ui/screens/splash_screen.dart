@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   void goToNextPage(){
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Get.offAll(()=> const MainBottomNavScreen());
+      //Get.offAll(()=> const MainBottomNavScreen());
+      Get.offAll(()=>  EmailVerificationScreen());
     });
   }
 
