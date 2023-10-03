@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crafty_bay/presentation/state_holders/carousel_slider_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
@@ -13,6 +15,7 @@ import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
    HomeScreen({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +78,45 @@ class _HomeScreenState extends State<HomeScreen> {
                ),
              ),
               const SizedBox(height:16.0),
-              const CarouselSliderWidget(),
+              GetBuilder<CarouselSliderController>(
+                builder: (_caroselSliderController) {
+                   return  _caroselSliderController.isSliderInProgress ?
+                   SizedBox(
+                    // width: 200.0,
+                     height: 180.0,
+                     child: Stack(
+                       children: [
+                         Center(
+                           child: Opacity(
+                             opacity: 0.03,
+                             child: SvgPicture.asset(
+                               AssetsPath.cadreBlackSVG,
+                               width: double.infinity,
+                               height: 180,
+                               fit: BoxFit.cover,
+                             ),
+                           ),
+                         ),
+                         Shimmer.fromColors(
+                           baseColor: Colors.grey,
+                           highlightColor:Colors.black.withOpacity(0.04),
+                           period: const Duration(milliseconds: 800),
+                           direction: ShimmerDirection.ltr,
+                           child: Container(
+                             height: 180,
+                             decoration: BoxDecoration(
+                               color: AppColors.primaryColor.withOpacity(0.2),
+                               borderRadius: BorderRadius.circular(16.0),
+                             ),
+                           )
+                         ),
+                       ],
+                     ),
+                   ) : CarouselSliderWidget(
+                  carouselSliders: _caroselSliderController.sliderModel.data ?? [],
+                );
+              }
+              ),
               SectionHeader(
                 title: 'All Category',
                 onTap: () {
@@ -84,17 +126,87 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 110,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return const CategoryCard();
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      width: 16.0,
+                child: GetBuilder<CategoryController>(
+                  builder: (_categoryController) {
+                    return _categoryController.isCategoryInProgress ?
+                        ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                            itemCount: 4,
+                            itemBuilder: (context,index){
+                              return SizedBox(
+                                width: 80,
+                                height: 120,
+                                child: Stack(
+                                  children: [
+                                    Center(
+                                      child: Opacity(
+                                        opacity: 0.03,
+                                        child: SvgPicture.asset(
+                                          AssetsPath.cadreBlackSVG,
+                                          width: 50,
+                                          height: 80,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  Shimmer.fromColors(
+                                      baseColor: Colors.grey,
+                                      highlightColor:
+                                          Colors.black.withOpacity(0.04),
+                                      period: const Duration(milliseconds: 800),
+                                      direction: ShimmerDirection.ltr,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 80,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.primaryColor.withOpacity(0.2),
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          Container(
+                                            height: 20,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.primaryColor.withOpacity(0.2),
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
+                                              ),
+                                            ),
+
+                                          ],
+                                        )
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }, separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(
+                            width: 16.0,
+                          );
+                        },)
+
+                        : ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _categoryController.categoryModel.data?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return CategoryCard(
+                          image: _categoryController.categoryModel.data?[index].categoryImg ?? '',
+                          categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          width: 16.0,
+                        );
+                      },
                     );
-                  },
+                  }
                 ),
               ),
               SectionHeader(

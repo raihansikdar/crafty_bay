@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/auth_controller/auth_utility_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
@@ -21,10 +22,13 @@ class _SplashScreenState extends State<SplashScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     goToNextPage();
   }
-  void goToNextPage(){
+  Future<void> goToNextPage() async {
+    await AuthUtilityController.getAccessToken();
     Future.delayed(const Duration(seconds: 3)).then((value) {
       //Get.offAll(()=> const MainBottomNavScreen());
-      Get.offAll(()=>  EmailVerificationScreen());
+      Get.offAll(() => AuthUtilityController.isLoggedIn
+          ? const MainBottomNavScreen()
+          : const EmailVerificationScreen());
     });
   }
 

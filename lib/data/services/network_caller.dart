@@ -14,17 +14,17 @@ class NetworkCaller{
      log("getRequest body ==> ${response.body}");
 
      if(response.statusCode == 200 && jsonDecode(response.body)['msg'] == 'success'){
-       return NetworkResponse(isSuccess: true, statusCode: response.statusCode, responseJsonBody: response.body);
+       return NetworkResponse(isSuccess: true, statusCode: response.statusCode, body: jsonDecode(response.body));
      }else if(response.statusCode == 401){
        gotoLogin();
      }else{
-       return NetworkResponse(isSuccess: false, statusCode: response.statusCode, responseJsonBody: null);
+       return NetworkResponse(isSuccess: false, statusCode: response.statusCode, body: null);
      }
 
    }catch(e){
      log(e.toString());
    }
-   return NetworkResponse(isSuccess: false, statusCode: -1, responseJsonBody: null);
+   return NetworkResponse(isSuccess: false, statusCode: -1, body: null);
   }
 
   ///----------------------------------->> post request method <<----------------------------------
@@ -37,18 +37,18 @@ class NetworkCaller{
       log("postRequest body ==> ${response.body}");
 
       if(response.statusCode == 200 && jsonDecode(response.body)['msg'] == 'success'){
-        return NetworkResponse(isSuccess: true, statusCode: response.statusCode, responseJsonBody: response.body);
+        return NetworkResponse(isSuccess: true, statusCode: response.statusCode, body: jsonDecode(response.body));
       }else if(response.statusCode == 401){
         if (isLogin == false) {
           gotoLogin();
         }
       }else{
-        return NetworkResponse(isSuccess: false, statusCode: response.statusCode, responseJsonBody: null);
+        return NetworkResponse(isSuccess: false, statusCode: response.statusCode, body: null);
       }
     }catch(e){
       log(e.toString());
     }
-    return NetworkResponse(isSuccess: false, statusCode: -1, responseJsonBody: null);
+    return NetworkResponse(isSuccess: false, statusCode: -1, body: null);
   }
 
   Future<void> gotoLogin() async {
