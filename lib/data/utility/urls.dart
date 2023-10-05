@@ -6,4 +6,5 @@ class Urls{
   static String verifyOtp({required String email,required String otp}) => "$_baseUrl/VerifyLogin/$email/$otp";
   static String carouselSliderCard = "$_baseUrl/ListProductSlider";
   static String getCategoryList = "$_baseUrl/CategoryList";
+  static String getProductByRemark({required String remark}) => "$_baseUrl/ListProductByRemark/$remark";
 }

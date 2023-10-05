@@ -1,6 +1,10 @@
+import 'package:crafty_bay/data/models/home/popular/product_model.dart';
 import 'package:crafty_bay/presentation/state_holders/carousel_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/new_product_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/popular_product_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/special_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/cart_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
@@ -32,6 +36,9 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<CarouselSliderController>().getCarouselSlider();
       Get.find<CategoryController>().getCategory();
+      Get.find<PopularProductController>().getPopularProduct();
+      Get.find<SpecialProductController>().getSpecialProduct();
+      Get.find<NewProductController>().getNewProduct();
     });
     super.initState();
   }

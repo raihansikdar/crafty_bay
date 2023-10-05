@@ -43,7 +43,7 @@ class WishListScreen extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return const FittedBox(
-                child: ProductCard(),
+                child: ProductCard(image: '', title: '', price: '', rating: 0,),
               );
             },
           ),
