@@ -17,7 +17,7 @@ class PopularProductController extends GetxController{
     _isPopularInProgress = true;
     update();
 
-    NetworkResponse response = await NetworkCaller().getRequest(Urls.getProductByRemark(remark: 'popular'));
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.getProductByRemark(remark: 'popular'));
 
     _isPopularInProgress = false;
     if(response.isSuccess){

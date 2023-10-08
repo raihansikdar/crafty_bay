@@ -9,20 +9,22 @@ import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key, required this.image, required this.title, required this.price, required this.rating,
+    super.key, required this.image, required this.title, required this.price, required this.rating, required this.onTap,
   });
 final String image;
 final String title;
 final String price;
 final int rating;
+final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(8.0),
-      onTap: (){
-        Get.to(()=>const ProductDetailsScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
-      },
+      onTap: onTap,
+      // onTap: (){
+      //   Get.to(()=>const ProductDetailsScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
+      // },
       child: Card(
         shadowColor: AppColors.primaryColor.withOpacity(0.1),
         elevation: 4.0,
@@ -45,7 +47,7 @@ final int rating;
                 child: CachedNetworkImage(
                   imageUrl: image,
                   placeholder:(context,url)=> SvgPicture.asset(AssetsPath.cadreBlackSVG) ,
-                  errorWidget: (context, url, error) => const Icon(Icons.image),
+                  errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
                 ),
               ),
                Padding(

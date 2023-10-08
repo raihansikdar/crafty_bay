@@ -5,9 +5,15 @@ import 'package:crafty_bay/presentation/ui/utility/custom_size_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CraftyBay extends StatelessWidget {
-  const CraftyBay({super.key});
+class CraftyBay extends StatefulWidget {
+  static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
+   CraftyBay({super.key});
 
+  @override
+  State<CraftyBay> createState() => _CraftyBayState();
+}
+
+class _CraftyBayState extends State<CraftyBay> {
   @override
   Widget build(BuildContext context) {
 
@@ -20,6 +26,7 @@ class CraftyBay extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CraftyBay',
+      navigatorKey: CraftyBay.globalKey,
       initialBinding: StateHolderBinder(),
       theme: ThemeData(
         primarySwatch: MaterialColor(AppColors.primaryColor.value, AppColors().color),

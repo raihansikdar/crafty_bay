@@ -17,7 +17,7 @@ class NewProductController extends GetxController{
     _isNewInProgress = true;
     update();
 
-    NetworkResponse response = await NetworkCaller().getRequest(Urls.getProductByRemark(remark: 'new'));
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.getProductByRemark(remark: 'new'));
 
     _isNewInProgress = false;
     if(response.isSuccess){

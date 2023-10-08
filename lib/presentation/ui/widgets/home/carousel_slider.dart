@@ -52,7 +52,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                             child: CachedNetworkImage(
                               imageUrl: sliderItem.image ?? "", // Provide the URL of the image
                               placeholder: (context, url) => SvgPicture.asset(AssetsPath.cadreBlackSVG),
-                              errorWidget: (context, url, error) => const Icon(Icons.image),
+                              errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
                               fit: BoxFit.cover, // You can adjust this to your needs
                             )
                         ),

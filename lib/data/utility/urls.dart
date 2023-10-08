@@ -7,4 +7,6 @@ class Urls{
   static String carouselSliderCard = "$_baseUrl/ListProductSlider";
   static String getCategoryList = "$_baseUrl/CategoryList";
   static String getProductByRemark({required String remark}) => "$_baseUrl/ListProductByRemark/$remark";
+  static String getProductDetails({required int productId}) => "$_baseUrl/ProductDetailsById/$productId";
+  static String addToCard = "$_baseUrl/CreateCartList";
 }

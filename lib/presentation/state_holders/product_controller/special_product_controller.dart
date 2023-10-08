@@ -17,7 +17,7 @@ class SpecialProductController extends GetxController{
     _isSpecialInProgress = true;
     update();
 
-    NetworkResponse response = await NetworkCaller().getRequest(Urls.getProductByRemark(remark: 'special'));
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.getProductByRemark(remark: 'special'));
 
     _isSpecialInProgress = false;
     if(response.isSuccess){

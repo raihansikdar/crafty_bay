@@ -1,9 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductCarouselSliderWidget extends StatefulWidget {
-  const ProductCarouselSliderWidget({Key? key}) : super(key: key);
+  final List<String>imageList;
+  const ProductCarouselSliderWidget({Key? key, required this.imageList}) : super(key: key);
 
   @override
   State<ProductCarouselSliderWidget> createState() => _ProductCarouselSliderWidgetState();
@@ -11,11 +15,7 @@ class ProductCarouselSliderWidget extends StatefulWidget {
 
 class _ProductCarouselSliderWidgetState extends State<ProductCarouselSliderWidget> {
   final ValueNotifier<int> _selectedSlider = ValueNotifier(0);
-  List<Map<String,String>> cardItems =[
-    {"img":"assets/images/card_demo.png"},
-    {"img":"assets/images/card_demo.png"},
-    {"img":"assets/images/card_demo.png"},
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -32,7 +32,7 @@ class _ProductCarouselSliderWidgetState extends State<ProductCarouselSliderWidge
                 _selectedSlider.value = page;
               }
           ),
-          items: cardItems.map((item) {
+          items: widget.imageList.map((imageUrl) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
@@ -41,7 +41,12 @@ class _ProductCarouselSliderWidgetState extends State<ProductCarouselSliderWidge
                     decoration:  BoxDecoration(
                         color: Colors.grey.shade300,
                     ),
-                   // child: Image.asset(item["img"]?? '')
+                    child: CachedNetworkImage(
+                      imageUrl:  imageUrl ?? '',
+                      placeholder:(context,url)=> SvgPicture.asset(AssetsPath.cadreBlackSVG) ,
+                      errorWidget: (context, url, error) => const Icon(Icons.image),
+                    ),
+
                 );
               },
             );
@@ -54,7 +59,7 @@ class _ProductCarouselSliderWidgetState extends State<ProductCarouselSliderWidge
          right: 0,
          child:  ValueListenableBuilder(valueListenable: _selectedSlider, builder: (context,value,_){
          List<Widget>list =[];
-         for(int i = 0;i<3;i++){
+         for(int i = 0;i<widget.imageList.length;i++){
            list.add( Container(
              height: 14,
              width: 14,

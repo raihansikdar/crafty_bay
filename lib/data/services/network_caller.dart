@@ -1,14 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:crafty_bay/application/app.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
+import 'package:crafty_bay/presentation/state_holders/auth_controller/auth_utility_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/email_verification_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class NetworkCaller{
   ///----------------------------------->> get request method <<----------------------------------
-  Future<NetworkResponse> getRequest(String url) async{
+  static Future<NetworkResponse> getRequest(String url) async{
    try{
-     Response response = await get(Uri.parse(url)); //headers: {'Content-Type': 'application/json','token':AuthUtility.userInfo.token.toString()
+     Response response = await get(Uri.parse(url),headers: {'Content-Type': 'application/json','token': AuthUtilityController.accessToken.toString()}); //headers: {'Content-Type': 'application/json','token':AuthUtility.userInfo.token.toString()
 
      log("getRequest statusCode ==> ${response.statusCode}");
      log("getRequest body ==> ${response.body}");
@@ -29,9 +33,9 @@ class NetworkCaller{
 
   ///----------------------------------->> post request method <<----------------------------------
 
-  Future<NetworkResponse> postRequest(String url,Map<String,dynamic>body,{bool isLogin = false}) async{
+  static Future<NetworkResponse> postRequest(String url,Map<String,dynamic>body,{bool isLogin = false}) async{
     try{
-      Response response = await post(Uri.parse(url),headers: {'Content-Type': 'application/json',}, body: jsonEncode(body)); // 'token': AuthUtility.userInfo.token.toString()
+      Response response = await post(Uri.parse(url),headers: {'Content-Type': 'application/json','token': AuthUtilityController.accessToken.toString()}, body: jsonEncode(body)); // 'token': AuthUtility.userInfo.token.toString()
 
       log("postRequest statusCode ==> ${response.statusCode}");
       log("postRequest body ==> ${response.body}");
@@ -51,11 +55,11 @@ class NetworkCaller{
     return NetworkResponse(isSuccess: false, statusCode: -1, body: null);
   }
 
-  Future<void> gotoLogin() async {
-    // await AuthUtility.clearUserInfo();
-    // Navigator.pushAndRemoveUntil(
-    //     TaskManagerApp.globalKey.currentContext!,
-    //     MaterialPageRoute(builder: (context) => LoginScreen()),
-    //         (route) => false);
+  static Future<void> gotoLogin() async {
+    await AuthUtilityController.clearInfo();
+    Navigator.pushAndRemoveUntil(
+        CraftyBay.globalKey.currentContext!,
+        MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
+            (route) => false);
   }
 }

@@ -1,6 +1,9 @@
+import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
+import 'package:crafty_bay/presentation/ui/utility/constants.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/category_card.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({Key? key}) : super(key: key);
@@ -29,8 +32,10 @@ class ProductListScreen extends StatelessWidget {
             mainAxisSpacing: 16.0,
           ),
           itemBuilder: (context, index) {
-            return const FittedBox(
-              child: ProductCard(image: '', title: '', price: '', rating: 0,),
+            return  FittedBox(
+              child: ProductCard(image: '', title: '', price: '', rating: 0, onTap: () {
+               // Get.to(()=>const ProductDetailsScreen(productData: " ",),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
+              },),
             );
           },
         ),

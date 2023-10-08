@@ -16,7 +16,7 @@ class CarouselSliderController extends GetxController{
   Future<bool> getCarouselSlider()async{
     _iSliderInProgress = true;
     update();
-    NetworkResponse response = await NetworkCaller().getRequest(Urls.carouselSliderCard);
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.carouselSliderCard);
 
     _iSliderInProgress = false;
 
