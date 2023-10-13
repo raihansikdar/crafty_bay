@@ -1,5 +1,6 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/category_card.dart';
@@ -121,6 +122,9 @@ class CategoriesListScreen extends StatelessWidget {
                           child: CategoryCard(
                             image: _categoryController.categoryModel.data?[index].categoryImg ?? "",
                             categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',
+                            onTab: () {
+                              Get.to(()=> ProductListScreen(categoryId: _categoryController.categoryModel.data![index].id!, categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',));
+                            },
                           ),
                         );
                   },

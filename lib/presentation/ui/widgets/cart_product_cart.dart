@@ -1,11 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:crafty_bay/data/models/cart_list_model.dart';
+import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class CartProductCard extends StatelessWidget {
+  final CartData cartData;
   const CartProductCard({
-    super.key,
+    super.key, required this.cartData,
   });
 
   @override
@@ -25,7 +31,12 @@ class CartProductCard extends StatelessWidget {
              color: AppColors.primaryColor.withOpacity(0.2),
              borderRadius:  BorderRadius.circular(12.0),
            ),
-            child: Image.asset(AssetsPath.shoePng),
+            child: CachedNetworkImage(
+              imageUrl: cartData.product?.image ?? "", // Provide the URL of the image
+              placeholder: (context, url) => SvgPicture.asset(AssetsPath.cadreBlackSVG),
+              errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
+              fit: BoxFit.cover, // You can adjust this to your needs
+            ),
           ),
           const SizedBox(
             width: 8.0,
@@ -45,7 +56,7 @@ class CartProductCard extends StatelessWidget {
                             // mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text("Bata new shoe Aw345566",style: TextStyle(
+                               Text(cartData.product?.title ?? '',style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500
@@ -53,13 +64,13 @@ class CartProductCard extends StatelessWidget {
                               const SizedBox(
                                 height: 4.0,
                               ),
-                              RichText(text: const TextSpan(
-                                  style: TextStyle(
+                              RichText(text:  TextSpan(
+                                  style: const TextStyle(
                                       color: Colors.black54
                                   ),
                                   children: [
-                                    TextSpan(text: 'Color: Black'),
-                                    TextSpan(text: 'Size: XL'),
+                                    TextSpan(text: 'Color: ${cartData.color ?? ''}'),
+                                    TextSpan(text: '${cartData.size ?? ''}'),
                                   ]
                               ))
                             ],
@@ -88,9 +99,9 @@ class CartProductCard extends StatelessWidget {
                                 lowerLimit: 1,
                                 upperLimit: 10,
                                 stepValue: 1,
-                                value: 1,
+                                value: cartData.numberOfItems,
                                 onChange: (int value){
-                                  print(value);
+                                  Get.find<CartListController>().changeItem(cartData.id!, value);
                                 }),
                           ),
                         )

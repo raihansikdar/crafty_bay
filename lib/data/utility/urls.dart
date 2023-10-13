@@ -9,4 +9,6 @@ class Urls{
   static String getProductByRemark({required String remark}) => "$_baseUrl/ListProductByRemark/$remark";
   static String getProductDetails({required int productId}) => "$_baseUrl/ProductDetailsById/$productId";
   static String addToCard = "$_baseUrl/CreateCartList";
+  static String getProductByCategory({required int categoryId}) => '$_baseUrl/ListProductByCategory/$categoryId';
+  static String getCartList = "$_baseUrl/CartList";
 }

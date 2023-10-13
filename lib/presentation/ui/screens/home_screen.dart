@@ -7,6 +7,7 @@ import 'package:crafty_bay/presentation/state_holders/product_controller/popular
 import 'package:crafty_bay/presentation/state_holders/product_controller/special_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/product_list_screen_by_remarks.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay/presentation/ui/utility/constants.dart';
@@ -206,6 +207,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           return CategoryCard(
                             image: _categoryController.categoryModel.data?[index].categoryImg ?? '',
                             categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',
+                            onTab: () {
+                              Get.to(()=> ProductListScreen(categoryId: _categoryController.categoryModel.data![index].id!, categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',));
+                            },
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
@@ -217,10 +221,39 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                 ),
               ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 8),
+              //   child: GetBuilder<PopularProductController>(
+              //     builder: (_popularProductController) {
+              //       return _popularProductController.isPopularInProgress ?
+              //          Row(
+              //            children: [
+              //              Container(
+              //                height: 20,
+              //                width: 60,
+              //                color: Colors.grey.shade200,
+              //              ),
+              //              Spacer(),
+              //              Container(
+              //                height: 20,
+              //                width: 40,
+              //                color: Colors.grey.shade200,
+              //              )
+              //            ],
+              //          )
+              //           : SectionHeader(
+              //         title: 'Popular',
+              //         onTap: () {
+              //          Get.to(()=> ProductListScreenByRemarks(productData: _popularProductController.popularProductModel.data ?? []),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+              //         },
+              //       );
+              //     }
+              //   ),
+              // ),
               SectionHeader(
                 title: 'Popular',
                 onTap: () {
-                  Get.to(()=>const ProductListScreen(),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                  Get.to(()=> ProductListScreen(productModel: Get.find<PopularProductController>().popularProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
                 },
               ),
               GetBuilder<PopularProductController>(
@@ -237,7 +270,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             image: _popularProductController.popularProductModel.data?[index].image ?? '',
                             title: _popularProductController.popularProductModel.data?[index].title ?? '',
                             price: _popularProductController.popularProductModel.data?[index].price ?? '',
-                            rating: (_popularProductController.popularProductModel.data?[index].star)?.toInt() ?? 0, onTap: () {
+                            rating: (_popularProductController.popularProductModel.data?[index].star)?.toInt() ?? 0,
+                            onTap: () {
                             Get.to(()=> ProductDetailsScreen(productId: _popularProductController.popularProductModel.data?[index].id ?? 0,),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
                           },
                           );
@@ -251,10 +285,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
               ),
+              // GetBuilder<SpecialProductController>(
+              //     builder: (_specialProductController) {
+              //       return SectionHeader(
+              //         title: 'Special',
+              //         onTap: () {
+              //           Get.to(()=> ProductListScreenByRemarks(productData: _specialProductController.specialProductModel.data ?? []),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+              //         },
+              //       );
+              //     }
+              // ),
               SectionHeader(
                 title: 'Special',
                 onTap: () {
-                  Get.to(()=>const ProductListScreen(),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                  Get.to(()=> ProductListScreen(productModel: Get.find<SpecialProductController>().specialProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
                 },
               ),
               GetBuilder<SpecialProductController>(
@@ -284,10 +328,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
               ),
+              // GetBuilder<NewProductController>(
+              //     builder: (_newProductController) {
+              //       return SectionHeader(
+              //         title: 'New',
+              //         onTap: () {
+              //           Get.to(()=> ProductListScreenByRemarks(productData: _newProductController.newProductModel.data ?? []),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+              //         },
+              //       );
+              //     }
+              // ),
               SectionHeader(
                 title: 'New',
                 onTap: () {
-                  Get.to(()=>const ProductListScreen(),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                  Get.to(()=> ProductListScreen(productModel: Get.find<NewProductController>().newProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
                 },
               ),
               GetBuilder<NewProductController>(
