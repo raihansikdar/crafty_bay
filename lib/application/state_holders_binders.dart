@@ -4,12 +4,14 @@ import 'package:crafty_bay/presentation/state_holders/auth_controller/otp_verifi
 import 'package:crafty_bay/presentation/state_holders/carousel_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/delete_cart_list_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/new_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/special_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controlller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:get/get.dart';
 
 class StateHolderBinder extends Bindings{
@@ -27,5 +29,7 @@ class StateHolderBinder extends Bindings{
     Get.put(AddToCartController());
     Get.put(ProductListController());
     Get.put(CartListController());
+    Get.put(DeleteCartListProductController());
+    Get.put(WishListController());
   }
 }

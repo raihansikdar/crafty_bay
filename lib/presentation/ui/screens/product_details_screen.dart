@@ -2,6 +2,7 @@ import 'package:crafty_bay/data/models/home/popular/product_data.dart';
 import 'package:crafty_bay/data/models/product_details/product_details_data.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controlller.dart';
+import 'package:crafty_bay/presentation/ui/screens/cart_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/review_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay/presentation/ui/utility/constants.dart';
@@ -276,6 +277,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     _addToCartController.addToCart(productId: productDetailsData.id!, color: selectedColor, size: selectedSize).then((value) {
                       if(value == true){
                         Get.snackbar("Success", "Product has been added in cart");
+                       // Get.to(()=> CartScreen());
                       }else{
                         Get.snackbar("Failed", "Failed to add cart");
                       }

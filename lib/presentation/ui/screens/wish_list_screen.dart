@@ -1,4 +1,5 @@
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/constants.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/category_card.dart';
@@ -38,18 +39,28 @@ class WishListScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8.0),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 16.0,
-            ),
-            itemBuilder: (context, index) {
-              return  FittedBox(
-                child: ProductCard(image: '', title: '', price: '', rating: 0, onTap: () {
-                //  Get.to(()=>const ProductDetailsScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
-                },),
+          child: GetBuilder<WishListController>(
+            builder: (_wishListController) {
+              return _wishListController.isWishListInProgress ? const Center(child: CircularProgressIndicator()) : GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 16.0,
+                ),
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return  FittedBox(
+                    child: ProductCard(
+                          image: "",
+                          title: "",
+                          price: '',
+                          rating: 0,
+                          onTap: () {
+                    //  Get.to(()=>const ProductDetailsScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
+                    },),
+                  );
+                },
               );
-            },
+            }
           ),
         ),
       ),

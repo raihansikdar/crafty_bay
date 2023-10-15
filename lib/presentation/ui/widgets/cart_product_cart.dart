@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crafty_bay/data/models/cart_list_model.dart';
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/delete_cart_list_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
@@ -78,10 +79,17 @@ class CartProductCard extends StatelessWidget {
                           ),
                         ),
 
-                        const Padding(
-                          padding: EdgeInsets.only(right: 8.0),
-                          child: Icon(Icons.delete_outline),
-                        )
+                         GetBuilder<DeleteCartListProductController>(
+                           builder: (_deleteCartListProductController) {
+                             return Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: IconButton(onPressed: () async{
+                                await _deleteCartListProductController.deleteCartProduct(productId: cartData.productId!);
+                                Get.find<CartListController>().getCartList();
+                              }, icon: const Icon(Icons.delete_outline_outlined)),
+                        );
+                           }
+                         )
                       ],
                     ),
                     Row(

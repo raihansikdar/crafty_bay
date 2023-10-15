@@ -11,4 +11,7 @@ class Urls{
   static String addToCard = "$_baseUrl/CreateCartList";
   static String getProductByCategory({required int categoryId}) => '$_baseUrl/ListProductByCategory/$categoryId';
   static String getCartList = "$_baseUrl/CartList";
+
+  static String deleteCartListProduct({required int productId}) => "$_baseUrl/DeleteCartList/$productId";
+  static String getWishList = "$_baseUrl/ProductWishList";
 }
