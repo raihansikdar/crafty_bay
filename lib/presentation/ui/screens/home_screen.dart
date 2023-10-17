@@ -5,6 +5,8 @@ import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller
 import 'package:crafty_bay/presentation/state_holders/product_controller/new_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/special_product_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/create_profile_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/read_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen_by_remarks.dart';
@@ -32,6 +34,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,8 +46,22 @@ class _HomeScreenState extends State<HomeScreen> {
             SvgPicture.asset(AssetsPath.craftybayLogoNavSVG),
             const Spacer(),
             CircularIconButton(
+              icon: Icons.light_mode_outlined,
+              onTap: (){
+                if(Get.isDarkMode){
+                  Get.changeThemeMode(ThemeMode.light);
+                }
+               else{
+                  Get.changeThemeMode(ThemeMode.dark);
+                }
+              },
+            ),
+            const SizedBox(width: 8.0,),
+            CircularIconButton(
               icon: Icons.person,
-              onTap: (){},
+              onTap: (){
+                Get.to(()=> CreateProfileScreen());
+              },
             ),
             const SizedBox(width: 8.0,),
             CircularIconButton(

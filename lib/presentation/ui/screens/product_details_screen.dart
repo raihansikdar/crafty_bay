@@ -125,7 +125,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Get.to(()=>const ReviewListScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
+                                Get.to(()=> ReviewListScreen(productId: productDetailsData.id!,),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
                               },
                               child: const Text(
                                 'Review',
@@ -277,7 +277,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     _addToCartController.addToCart(productId: productDetailsData.id!, color: selectedColor, size: selectedSize).then((value) {
                       if(value == true){
                         Get.snackbar("Success", "Product has been added in cart");
-                       // Get.to(()=> CartScreen());
+                        Get.to(()=> CartScreen());
                       }else{
                         Get.snackbar("Failed", "Failed to add cart");
                       }

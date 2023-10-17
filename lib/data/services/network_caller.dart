@@ -14,7 +14,7 @@ class NetworkCaller{
    try{
      Response response = await get(Uri.parse(url),headers: {'Content-Type': 'application/json','token': AuthUtilityController.accessToken.toString()}); //headers: {'Content-Type': 'application/json','token':AuthUtility.userInfo.token.toString()
 
-     log("getRequest statusCode ==> ${response.statusCode}");
+    log("getRequest statusCode ==> ${response.statusCode}");
      log("getRequest body ==> ${response.body}");
 
      if(response.statusCode == 200 && jsonDecode(response.body)['msg'] == 'success'){

@@ -48,13 +48,9 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 16,top: 10.0),
-                          // child: Image.network(item.image ?? '',), // change here
-                            child: CachedNetworkImage(
-                              imageUrl: sliderItem.image ?? "", // Provide the URL of the image
-                              placeholder: (context, url) => SvgPicture.asset(AssetsPath.cadreBlackSVG),
-                              errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
-                              fit: BoxFit.cover, // You can adjust this to your needs
-                            )
+                         // child: Image.network(item.image ?? '',), // change here
+                            child: CustomCachedImage(imageUrl: sliderItem.image ?? "",)
+
                         ),
                         Positioned(
                             bottom: 10,
@@ -92,6 +88,23 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
           );
         })
       ],
+    );
+  }
+}
+
+class CustomCachedImage extends StatelessWidget {
+  const CustomCachedImage({
+    super.key, required this.imageUrl,
+  });
+  final String imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return CachedNetworkImage(
+      imageUrl: imageUrl, // Provide the URL of the image
+      placeholder: (context, url) => SvgPicture.asset(AssetsPath.cadreBlackSVG),
+      errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
+      fit: BoxFit.cover, // You can adjust this to your needs
     );
   }
 }

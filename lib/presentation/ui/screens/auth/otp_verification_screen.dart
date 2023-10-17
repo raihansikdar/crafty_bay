@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:crafty_bay/presentation/state_holders/auth_controller/email_verification_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/auth_controller/otp_verification_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/timer_controller.dart';
-import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/create_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
@@ -260,7 +260,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   Future<void>  verifyOtp(OtpVerificationController controller) async {
     final response = await controller.verifyOtp(email: widget.email, otp: _otpController.text.trim());
     if(response == true){
-      Get.to(()=>const MainBottomNavScreen());
+      Get.offAll(()=>const MainBottomNavScreen());
     }else{
       Get.snackbar("Failed", "Otp verification failed",
           colorText: Colors.black, backgroundColor: Colors.red.shade200);
