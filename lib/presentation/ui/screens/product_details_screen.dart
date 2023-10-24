@@ -24,7 +24,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColorIndex = 0;
   int _selectedSizeIndex = 0;
-
+  int quantity = 1;
 
   @override
   void initState() {
@@ -99,7 +99,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 stepValue: 1,
                                 value: 1,
                                 onChange: (newValue) {
-                                  print(newValue);
+                                  quantity = newValue;
                                 })
                           ],
                         ),
@@ -158,25 +158,38 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       const SizedBox(
                           height: 10.0,
                         ),
+
                         SizedBox(
                           height: 28,
-                          child: ColorPicker(
-                            colors: (productDetailsData.color?.split(',') ?? []).map((colorHex) {
-                              final trimmedHex = colorHex.trim();
-                              if (trimmedHex.length != 7 || !trimmedHex.startsWith("#")) {
-                                // Handle invalid color format here if necessary
-                                return Colors.transparent; // Or any default color
-                              }
-                              final hexColor = int.parse(trimmedHex.substring(1), radix: 16);
-                              return Color(hexColor | 0xFF000000); // Set the alpha channel to 255 (fully opaque)
-                            }).toList(),
-
-                            initialSelectedColor: _selectedColorIndex,
-                            onSelectedColor: (int index) {
+                          child: SizePicker(
+                            sizes: productDetailsData.color?.split(',') ?? [],
+                            initialSelectedSize: 0,
+                            onSelectedSize: (int index){
                               _selectedColorIndex = index;
                             },
+
                           ),
                         ),
+
+                        // SizedBox(
+                        //   height: 28,
+                        //   child: ColorPicker(
+                        //     colors: (productDetailsData.color?.split(',') ?? []).map((colorHex) {
+                        //       final trimmedHex = colorHex.trim();
+                        //       if (trimmedHex.length != 7 || !trimmedHex.startsWith("#")) {
+                        //         // Handle invalid color format here if necessary
+                        //         return Colors.transparent; // Or any default color
+                        //       }
+                        //       final hexColor = int.parse(trimmedHex.substring(1), radix: 16);
+                        //       return Color(hexColor | 0xFF000000); // Set the alpha channel to 255 (fully opaque)
+                        //     }).toList(),
+                        //
+                        //     initialSelectedColor: _selectedColorIndex,
+                        //     onSelectedColor: (int index) {
+                        //       _selectedColorIndex = index;
+                        //     },
+                        //   ),
+                        // ),
                         const SizedBox(
                           height: 16.0,
                         ),
@@ -193,7 +206,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         SizedBox(
                           height: 28,
                           child: SizePicker(
-                            sizes: productDetailsData.size?.split(RegExp(r'[,.]')) ?? [],
+                            sizes: productDetailsData.size?.split(RegExp(r'[,]')) ?? [],
                               initialSelectedSize: 0,
                               onSelectedSize: (int index){
                                 _selectedSizeIndex = index;
@@ -272,12 +285,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     String selectedColor = productDetailsData.color?.split(',')[_selectedColorIndex] ?? '';
-                    String selectedSize = productDetailsData.size?.split(RegExp(r'[,.]'))[_selectedSizeIndex] ?? '';
+                    String selectedSize = productDetailsData.size?.split(',')[_selectedSizeIndex] ?? '';
 
-                    _addToCartController.addToCart(productId: productDetailsData.id!, color: selectedColor, size: selectedSize).then((value) {
+                    _addToCartController.addToCart(productId: productDetailsData.id!, color: selectedColor, size: selectedSize, quanity: quantity).then((value) {
                       if(value == true){
                         Get.snackbar("Success", "Product has been added in cart");
-                        Get.to(()=> CartScreen());
+                       // Get.to(()=> CartScreen());
                       }else{
                         Get.snackbar("Failed", "Failed to add cart");
                       }
@@ -294,8 +307,289 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 }
 
+/*
+class ProductDetailsScreen extends StatefulWidget {
+  final int productId;
+  const ProductDetailsScreen({super.key, required this.productId});
+
+  @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+
+  int _selectedColorIndex = 0;
+  int _selectedSizeIndex = 0;
+  int quantity = 1;
 
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProductDetailsController>().getProductDetails(productId: widget.productId,);
+    });
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GetBuilder<ProductDetailsController>(
+          builder: (productDetailsController) {
+            if (productDetailsController.getProductDetailsInProgress) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Stack(
+                            children: [
+                              ProductCarouselSliderWidget(
+                                imageList: [
+                                  productDetailsController.productDetailsData.img1 ?? '',
+                                  productDetailsController.productDetailsData.img2 ?? '',
+                                  productDetailsController.productDetailsData.img3 ?? '',
+                                  productDetailsController.productDetailsData.img4 ?? '',
+                                ],
+                              ),
+                              productDetailsAppBar,
+                            ],
+                          ),
+                          productDetails(productDetailsController.productDetailsData,
+                              productDetailsController.availableColors),
+                        ],
+                      ),
+                    ),
+                  ),
+                  cartToCartBottomContainer(
+                    productDetailsController.productDetailsData,
+                    productDetailsController.availableColors,
+                    productDetailsController.availableSizes,
+                  ),
+                ],
+              ),
+            );
+          }
+      ),
+    );
+  }
+
+  Padding productDetails(ProductDetailsData productDetailsData, List<String> colors) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                  child: Text(
+                    productDetailsData.product?.title ?? '',
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.5),
+                  )),
+              CustomStepper(
+                  lowerLimit: 1,
+                  upperLimit: 10,
+                  stepValue: 1,
+                  value: 1,
+                  onChange: (newValue) {
+                    quantity = newValue;
+                  })
+            ],
+          ),
+          Row(
+            children: [
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.star,
+                    size: 18,
+                    color: Colors.amber,
+                  ),
+                  Text(
+                    '${productDetailsData.product?.star ?? 0}',
+                    style: const TextStyle(
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.blueGrey),
+                  ),
+                ],
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'Review',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              const Card(
+                color: AppColors.primaryColor,
+                child: Padding(
+                  padding: EdgeInsets.all(2.0),
+                  child: Icon(
+                    Icons.favorite_border,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          ),
+          const Text(
+            'Color',
+            style: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          SizedBox(
+            height: 28,
+            child: SizedBox(
+              height: 28,
+              child: SizePicker(
+                initialSelectedSize: 0,
+                onSelectedSize: (int selectedSize) {
+                  _selectedColorIndex = selectedSize;
+                },
+                sizes: productDetailsData.color?.split(',') ?? [],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const Text(
+            'Size',
+            style: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          SizedBox(
+            height: 28,
+            child: SizedBox(
+              height: 28,
+              child: SizePicker(
+                initialSelectedSize: 0,
+                onSelectedSize: (int selectedSize) {
+                  _selectedColorIndex = selectedSize;
+                },
+                sizes: productDetailsData.size?.split(',') ?? [],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const Text(
+            'Description',
+            style: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(productDetailsData.des ?? ''),
+        ],
+      ),
+    );
+  }
+
+  AppBar get productDetailsAppBar {
+    return AppBar(
+      leading: const BackButton(
+        color: Colors.black54,
+      ),
+      title: const Text(
+        'Product details',
+        style: TextStyle(color: Colors.black54),
+      ),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    );
+  }
+
+  Container cartToCartBottomContainer(ProductDetailsData details, List<String> colors, List<String> sizes) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+          color: AppColors.primaryColor.withOpacity(0.1),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          )
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Price', style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Colors.black54
+              ),),
+              SizedBox(height: 4,),
+              Text('\$1000', style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  color: AppColors.primaryColor
+              ),),
+            ],
+          ),
+          SizedBox(
+            width: 120,
+            child: GetBuilder<AddToCartController>(
+                builder: (addToCartController) {
+                  if (addToCartController.isAddToCartInProgress) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ElevatedButton(
+                    onPressed: () async {
+                      final result = await addToCartController.addToCart(
+                        productId: details.id!,
+                    color: colors[_selectedColorIndex].toString(),
+                    size: sizes[_selectedSizeIndex],
+                    quanity: quantity,
+                  );
+                      if (result) {
+                        Get.snackbar('Added to cart',
+                            'This product has been added to cart list',
+                            snackPosition: SnackPosition.BOTTOM);
+                      }
+                    },
+                    child: const Text('Add to cart'),
+                  );
+                }
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+*/
 
 
 /*

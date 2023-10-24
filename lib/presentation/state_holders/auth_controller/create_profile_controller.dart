@@ -12,15 +12,41 @@ class CreateProfileController extends GetxController{
   bool get isCreateProfileInProgress => _isCreateProfileInProgress;
   String get errorMessage => _errorMessage;
 
-  Future<bool> createUserProfile({required String firstName,required String lastName,required String mobile,required String city,required String shippingAddress})async{
+  Future<bool> createUserProfile({
+    required String cusName,
+    required String cusAdd,
+    required String cusCity,
+    required String cusState,
+    required String cusPostcode,
+    required String cusCountry,
+    required String cusPhone,
+    required String cusFax,
+    required String shipName,
+    required String shipAdd,
+    required String shipCity,
+    required String shipState,
+    required String shipPostcode,
+    required String shipCountry,
+    required String shipPhone
+})async{
     _isCreateProfileInProgress = true;
     update();
     Map<String,dynamic> requestBody = {
-      "firstName":firstName,
-      "lastName":lastName,
-      "mobile":mobile,
-      "city":city,
-      "shippingAddress":shippingAddress
+      "cus_name": cusName,
+      "cus_add": cusAdd,
+      "cus_city": cusCity,
+      "cus_state": cusState,
+      "cus_postcode": cusPostcode,
+      "cus_country": cusCountry,
+      "cus_phone": cusPhone,
+      "cus_fax": cusFax,
+      "ship_name": shipName,
+      "ship_add": shipAdd,
+      "ship_city": shipCity,
+      "ship_state": shipState,
+      "ship_postcode": shipPostcode,
+      "ship_country": shipCountry,
+      "ship_phone": shipPhone
     };
     NetworkResponse response = await NetworkCaller.postRequest(Urls.createUserProfile, requestBody);
     _isCreateProfileInProgress = false;

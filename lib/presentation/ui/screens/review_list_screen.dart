@@ -77,7 +77,14 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
                                       width: 16.0,
                                     ),
                                      Text(
-                                     "${_productReviewController.productReviewModel.data?[index].profile?.firstName ?? ''} ${_productReviewController.productReviewModel.data?[index].profile?.lastName ?? ''}",
+                                     _productReviewController.productReviewModel.data?[index].profile?.cusName ?? '',
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.grey),
+                                    ),
+                                    Text(
+                                      _productReviewController.productReviewModel.data?.first.rating ?? '',
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600,

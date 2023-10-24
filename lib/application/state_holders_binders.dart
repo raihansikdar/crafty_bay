@@ -15,6 +15,7 @@ import 'package:crafty_bay/presentation/state_holders/product_controller/special
 import 'package:crafty_bay/presentation/state_holders/product_details_controlller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_review_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/theme_mode_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:get/get.dart';
 
@@ -39,5 +40,6 @@ class StateHolderBinder extends Bindings{
     Get.put(CreateProductReviewController());
     Get.put(ReadProfileController());
     Get.put(CreateProfileController());
+    Get.put(ThemeModeController());
   }
 }

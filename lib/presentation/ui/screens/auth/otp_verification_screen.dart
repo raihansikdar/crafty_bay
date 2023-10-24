@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:crafty_bay/presentation/state_holders/auth_controller/email_verification_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/auth_controller/otp_verification_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/auth_controller/read_profile_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/timer_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/create_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
@@ -83,12 +84,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                       validator: (String? value){
                         if(value?.isEmpty ?? true){
                           return "Please enter the OTP code";
-                        }else if(value!.length != 4){
-                          return 'OTP code must be 4 digits long';
+                        }else if(value!.length != 6){
+                          return 'OTP code must be 6 digits long';
                         }
                         return null;
                       },
-                      length: 4,
+                      length: 6,
                       obscureText: false,
                       animationType: AnimationType.fade,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -260,7 +261,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   Future<void>  verifyOtp(OtpVerificationController controller) async {
     final response = await controller.verifyOtp(email: widget.email, otp: _otpController.text.trim());
     if(response == true){
-      Get.offAll(()=>const MainBottomNavScreen());
+      // Get.offAll(()=>const MainBottomNavScreen());
+      await Get.find<ReadProfileController>().getUserProfile();
+
+      Get.find<ReadProfileController>().profileModel.data == null
+          ? Get.offAll(()=> CreateProfileScreen())
+          : Get.offAll(()=> MainBottomNavScreen());
     }else{
       Get.snackbar("Failed", "Otp verification failed",
           colorText: Colors.black, backgroundColor: Colors.red.shade200);

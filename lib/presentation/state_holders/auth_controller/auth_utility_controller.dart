@@ -21,4 +21,5 @@ class AuthUtilityController{
   static bool get isLoggedIn{
     return _accessToken != null;
   }
+
 }

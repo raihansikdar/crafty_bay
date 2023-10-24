@@ -46,56 +46,83 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: GetBuilder<CartListController>(
-        builder: (_cartListController) {
-
-          return _cartListController.isCartListInProgress ? const Center(child: CircularProgressIndicator()) : Column(
-            children: [
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: _cartListController.cartListModel.data?.length ?? 0,
-                      itemBuilder: (context,index){
-                   return  CartProductCard(cartData: _cartListController.cartListModel.data![index],);
-                  }),),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 16),
-                decoration: BoxDecoration(
-                    color: AppColors.primaryColor.withOpacity(0.1),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16),
-                    )
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Total Price', style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                            color: Colors.black54
-                        ),),
-                        const SizedBox(height: 4,),
-                        Text('\$${_cartListController.totalPrice}', style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                            color: AppColors.primaryColor
-                        ),),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 120,
-                      child: ElevatedButton(onPressed: () {}, child: const Text('Checkout'),),)
-                  ],
-                ),
-              )
-            ],
+      body:  GetBuilder<CartListController>(builder: (_cartListController) {
+        if (_cartListController.isCartListInProgress) {
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         }
-      ),
+        // if (_cartListController.cartListModel.data != null &&
+        //     _cartListController.cartListModel.data!.isEmpty) {
+        //   return const Center(
+        //     child: Text('Cart is empty!'),
+        //   );
+        // }
+        return Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount:
+                _cartListController.cartListModel.data?.length ?? 0,
+                itemBuilder: (context, index) {
+                  return CartProductCard(cartData: _cartListController.cartListModel.data![index]);
+                },
+              ),
+            ),
+            Container(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withOpacity(0.1),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Total Price',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: Colors.black54),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        '\$ ${_cartListController.totalPrice}',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            color: AppColors.primaryColor),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 120,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Checkout'),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
+
+
+
+
+
+
 

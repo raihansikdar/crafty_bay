@@ -1,3 +1,4 @@
+import 'package:crafty_bay/application/app.dart';
 import 'package:crafty_bay/data/models/home/popular/product_data.dart';
 import 'package:crafty_bay/presentation/state_holders/carousel_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
@@ -48,12 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
             CircularIconButton(
               icon: Icons.light_mode_outlined,
               onTap: (){
-                if(Get.isDarkMode){
-                  Get.changeThemeMode(ThemeMode.light);
-                }
-               else{
-                  Get.changeThemeMode(ThemeMode.dark);
-                }
+                themeModeController.toggleThemeMode();
+               //  if(Get.isDarkMode){
+               //    Get.changeThemeMode(ThemeMode.light);
+               //  }
+               // else{
+               //    Get.changeThemeMode(ThemeMode.dark);
+               //  }
               },
             ),
             const SizedBox(width: 8.0,),

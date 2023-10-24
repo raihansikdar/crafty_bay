@@ -11,9 +11,9 @@ class ReviewAddScreen extends StatefulWidget {
 }
 
 class _ReviewAddScreenState extends State<ReviewAddScreen> {
-  TextEditingController _firstNameController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _cusController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
+  TextEditingController _ratingController = TextEditingController();
 
   GlobalKey<FormState>_formKey = GlobalKey<FormState>();
 
@@ -41,7 +41,7 @@ class _ReviewAddScreenState extends State<ReviewAddScreen> {
             children: [
               const SizedBox(height: 32.0,),
               TextFormField(
-                controller: _firstNameController,
+                controller: _cusController,
                 decoration: const InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -57,16 +57,16 @@ class _ReviewAddScreenState extends State<ReviewAddScreen> {
               ),
               const SizedBox(height: 16.0,),
               TextFormField(
-                controller: _lastNameController,
+                controller: _ratingController,
                 decoration: const InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: "Last Name",
+                    hintText: "Rating",
                     hintStyle: TextStyle(color: Colors.grey)
                 ),
                 validator: (String? value){
                   if(value?.isEmpty ?? true){
-                    "Enter your last name";
+                    "Enter your first name";
                   }
                   return null;
                 },
@@ -100,10 +100,15 @@ class _ReviewAddScreenState extends State<ReviewAddScreen> {
                     child: ElevatedButton(
                       onPressed: ()async {
                         if(_formKey.currentState!.validate()){
-                          final response = await _createProductReviewController.createProductReview(description: _descriptionController.text.trim(), productId: widget.productId);
-                          if(response == true){
-                            _firstNameController.clear();
-                            _lastNameController.clear();
+                          final response = await _createProductReviewController
+                            .createProductReview(
+                          description: _descriptionController.text.trim(),
+                          productId: widget.productId,
+                          rating: double.parse(_ratingController.text.trim()),
+                        );
+                        if(response == true){
+                            _cusController.clear();
+                            _ratingController.clear();
                             _descriptionController.clear();
                             Get.snackbar("Success", "Review has been added");
                            if(mounted){

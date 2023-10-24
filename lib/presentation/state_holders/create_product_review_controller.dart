@@ -11,10 +11,11 @@ class CreateProductReviewController extends GetxController{
   bool get isCreateReviewInProgress => _isCreateReviewInProgress;
   String get errorMessage => _errorMessage;
 
-  Future<bool> createProductReview({required String description,required int productId})async{
+  Future<bool> createProductReview({required String description,required int productId,required double rating})async{
     Map<String,dynamic>requestBody = {
       "description":description,
-      "product_id":productId
+      "product_id":productId,
+      "rating": rating
     };
     _isCreateReviewInProgress = true;
     update();
