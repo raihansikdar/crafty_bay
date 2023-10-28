@@ -13,11 +13,17 @@ class Urls{
   static String getCartList = "$_baseUrl/CartList";
 
   static String deleteCartListProduct({required int productId}) => "$_baseUrl/DeleteCartList/$productId";
+
   static String getWishList = "$_baseUrl/ProductWishList";
+  static String createWishList({required String productId}) => "$_baseUrl/CreateWishList/$productId";
+
   static String createProductReview = "$_baseUrl/CreateProductReview";
   static String getProductReview({required int productId}) => "$_baseUrl/ListReviewByProduct/$productId";
 
   static String readUserProfile = "$_baseUrl/ReadProfile";
   static String createUserProfile = "$_baseUrl/CreateProfile";
+
+
+  static String createInvoice = "$_baseUrl/InvoiceCreate";
 
 }

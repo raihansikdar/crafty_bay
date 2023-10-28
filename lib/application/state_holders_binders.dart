@@ -7,8 +7,10 @@ import 'package:crafty_bay/presentation/state_holders/carousel_slider_controller
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/create_product_review_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/delete_cart_list_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/payment_controller/create_invoice_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/new_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/special_product_controller.dart';
@@ -36,10 +38,12 @@ class StateHolderBinder extends Bindings{
     Get.put(CartListController());
     Get.put(DeleteCartListProductController());
     Get.put(WishListController());
+    Get.put(CreateWishListController());
     Get.put(ProductReviewController());
     Get.put(CreateProductReviewController());
     Get.put(ReadProfileController());
     Get.put(CreateProfileController());
     Get.put(ThemeModeController());
+    Get.put(CreateInvoiceController());
   }
 }

@@ -41,24 +41,24 @@ class ProductDetailsData {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     product =
-    json['product'] != null ? ProductData.fromJson(json['product']) : null;
+    json['product'] != null ? new ProductData.fromJson(json['product']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['img1'] = img1;
-    data['img2'] = img2;
-    data['img3'] = img3;
-    data['img4'] = img4;
-    data['des'] = des;
-    data['color'] = color;
-    data['size'] = size;
-    data['product_id'] = productId;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    if (product != null) {
-      data['product'] = product!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['img1'] = this.img1;
+    data['img2'] = this.img2;
+    data['img3'] = this.img3;
+    data['img4'] = this.img4;
+    data['des'] = this.des;
+    data['color'] = this.color;
+    data['size'] = this.size;
+    data['product_id'] = this.productId;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.product != null) {
+      data['product'] = this.product!.toJson();
     }
     return data;
   }

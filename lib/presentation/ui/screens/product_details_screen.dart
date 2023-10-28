@@ -1,6 +1,7 @@
 import 'package:crafty_bay/data/models/home/popular/product_data.dart';
 import 'package:crafty_bay/data/models/product_details/product_details_data.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controlller.dart';
 import 'package:crafty_bay/presentation/ui/screens/cart_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/review_list_screen.dart';
@@ -25,7 +26,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColorIndex = 0;
   int _selectedSizeIndex = 0;
   int quantity = 1;
-
+  bool tabWish = false;
   @override
   void initState() {
     super.initState();
@@ -135,16 +136,31 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     fontWeight: FontWeight.w500),
                               ),
                             ),
-                            const Card(
-                              color: AppColors.primaryColor,
-                              child: Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: Icon(
-                                  Icons.favorite_border,
-                                  size: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
+                            GetBuilder<CreateWishListController>(
+                              builder: (_createWishListController) {
+                                return InkWell(
+                                  onTap: (){
+                                    tabWish = !tabWish;
+                                    setState(() {});
+                                    _createWishListController.createWishListProduct(productId: widget.productId.toString());
+                                  },
+                                  child:  Card(
+                                    color: AppColors.primaryColor,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(2.0),
+                                      child: tabWish ?Icon(
+                                        Icons.favorite_border,
+                                        size: 16,
+                                        color: Colors.red,
+                                      ) : Icon(
+                                        Icons.favorite_border,
+                                        size: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
                             )
                           ],
                         ),

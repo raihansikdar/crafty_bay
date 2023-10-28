@@ -38,23 +38,20 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
               builder: (BuildContext context) {
                 return Container(
                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(right: 10),
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    //padding: const EdgeInsets.only(right: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
                     decoration:  BoxDecoration(
                         color: AppColors.primaryColor.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(16.0)
                     ),
                     child: Stack(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16,top: 10.0),
                          // child: Image.network(item.image ?? '',), // change here
-                            child: CustomCachedImage(imageUrl: sliderItem.image ?? "",)
+                         CustomCachedImage(imageUrl: sliderItem.image ?? ""),
 
-                        ),
                         Positioned(
                             bottom: 10,
-                            right: 10,
+                            left: 10,
                             child: Text(sliderItem.title ?? '',style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
@@ -100,11 +97,14 @@ class CustomCachedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl, // Provide the URL of the image
-      placeholder: (context, url) => SvgPicture.asset(AssetsPath.cadreBlackSVG),
-      errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
-      fit: BoxFit.cover, // You can adjust this to your needs
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.0),
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,height: double.infinity,width: double.infinity, // Provide the URL of the image
+        placeholder: (context, url) => SvgPicture.asset(AssetsPath.cadreBlackSVG),
+        errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
+        fit: BoxFit.cover, // You can adjust this to your needs
+      ),
     );
   }
 }
