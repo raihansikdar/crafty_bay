@@ -33,7 +33,7 @@ class WishListController extends GetxController{
   Future<bool> deleteWishList({required int productId}) async{
     _isWishListInProgress = true;
     update();
-    NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteCartListProduct(productId: productId));
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteWishList(productId: productId));
     _isWishListInProgress = false;
 
     if(response.isSuccess){
