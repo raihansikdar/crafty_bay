@@ -29,4 +29,21 @@ class WishListController extends GetxController{
       return false;
     }
   }
+// -----------------------------delete wishList-------------------------
+  Future<bool> deleteWishList({required int productId}) async{
+    _isWishListInProgress = true;
+    update();
+    NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteCartListProduct(productId: productId));
+    _isWishListInProgress = false;
+
+    if(response.isSuccess){
+      _wishListModel.data?.removeWhere((element) => element.productId == productId);
+      update();
+      return true;
+    }else{
+      _message = "WishList product fetch failed! Try again";
+      update();
+      return false;
+    }
+  }
 }

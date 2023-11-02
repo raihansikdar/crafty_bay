@@ -4,6 +4,7 @@ import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/constants.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/category_card.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
+import 'package:crafty_bay/presentation/ui/widgets/wish_list.card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -62,14 +63,18 @@ class _WishListScreenState extends State<WishListScreen> {
                 itemCount: _wishListController.wishListModel.data?.length ?? 0,
                 itemBuilder: (context, index) {
                   return  FittedBox(
-                    child: ProductCard(
+                    child: WishListCard(
                           image: _wishListController.wishListModel.data?.first.product?.image ?? '',
                           title: _wishListController.wishListModel.data?.first.product?.title ?? '',
                           price: _wishListController.wishListModel.data?.first.product?.price ?? '',
                           rating: _wishListController.wishListModel.data?.first.product?.star ?? 0,
+                          onDeleteTap: () async {
+                            await _wishListController.deleteWishList(productId: _wishListController.wishListModel.data!.first.productId!);
+                            //_wishListController.getWishListProduct();
+                          },
                           onTap: () {
                      Get.to(()=> ProductDetailsScreen(productId: _wishListController.wishListModel.data!.first.productId!,),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
-                    },),
+                    }, ),
                   );
                 },
               );

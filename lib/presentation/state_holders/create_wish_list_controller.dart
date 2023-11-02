@@ -12,7 +12,7 @@ class CreateWishListController extends GetxController{
 
   String get message => _message;
 
-  Future<bool> createWishListProduct({required String productId}) async{
+  Future<bool> createWishListProduct({required int productId}) async{
     _isCreateWishListInProgress = true;
     update();
     NetworkResponse response = await NetworkCaller.getRequest(Urls.createWishList(productId: productId));
@@ -22,7 +22,7 @@ class CreateWishListController extends GetxController{
       update();
       return true;
     }else{
-      _message = "WishList product fetch failed! Try again";
+      _message = "WishList delete failed! Try again";
       update();
       return false;
     }

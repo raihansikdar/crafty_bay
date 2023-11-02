@@ -5,7 +5,7 @@ class ThemeModeController{
   ValueNotifier<ThemeMode> themeMode = ValueNotifier(ThemeMode.light);
   void changeThemeMode(ThemeMode mode){
     themeMode.value = mode;
-    _saveThemeModeToPreferences(mode);
+
   }
   void toggleThemeMode(){
     if(themeMode.value == ThemeMode.light){
@@ -13,21 +13,24 @@ class ThemeModeController{
     }else{
       themeMode.value = ThemeMode.light;
     }
-    _saveThemeModeToPreferences(themeMode.value);
-  }
 
-  Future<void> _saveThemeModeToPreferences(ThemeMode mode) async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString('themeMode', mode.toString().split('.').last);
   }
-
+  void saveCurrentThemeMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('themeMode', themeMode.value.index);
+  }
+  Future<ThemeMode> loadSavedThemeMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int themeModeIndex = prefs.getInt('themeMode') ?? 0;
+    return ThemeMode.values[themeModeIndex];
+  }
   Future<void> initializeThemeMode() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    final storedThemeMode = sharedPreferences.getString('themeMode');
-    if (storedThemeMode != null) {
-      final theme = ThemeMode.values.firstWhere(
-              (e) => e.toString().split('.').last == storedThemeMode);
-      themeMode.value = theme;
-    }
+    ThemeMode savedThemeMode = await loadSavedThemeMode();
+    themeMode.value = savedThemeMode;
   }
+  // void initializeThemeMode() async {
+  //   ThemeMode savedThemeMode = await loadSavedThemeMode();
+  //   themeMode.value = savedThemeMode;
+  // }
+
 }

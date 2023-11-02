@@ -142,17 +142,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   onTap: (){
                                     tabWish = !tabWish;
                                     setState(() {});
-                                    _createWishListController.createWishListProduct(productId: widget.productId.toString());
+                                    _createWishListController.createWishListProduct(productId: widget.productId);
                                   },
                                   child:  Card(
                                     color: AppColors.primaryColor,
                                     child: Padding(
-                                      padding: EdgeInsets.all(2.0),
-                                      child: tabWish ?Icon(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: tabWish ?const Icon(
                                         Icons.favorite_border,
                                         size: 16,
                                         color: Colors.red,
-                                      ) : Icon(
+                                      ) : const Icon(
                                         Icons.favorite_border,
                                         size: 16,
                                         color: Colors.white,

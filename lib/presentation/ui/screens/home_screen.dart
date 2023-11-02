@@ -33,8 +33,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
+  TextEditingController _searchController = TextEditingController();
+   bool _changeText = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             CircularIconButton(
               icon: Icons.person,
               onTap: (){
-                Get.to(()=> CreateProfileScreen());
+                Get.to(()=> const CreateProfileScreen());
               },
             ),
             const SizedBox(width: 8.0,),
@@ -83,7 +83,16 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              TextField(
+              TextFormField(
+                onChanged: (String value){
+                  if (value.isNotEmpty) {
+                    _changeText = true;
+                  } else {
+                    _changeText = false;
+                  }
+                  setState(() {});
+                },
+                controller: _searchController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey.shade200,
@@ -99,6 +108,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   enabledBorder:  const OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
+                    suffixIcon: InkWell(
+                      onTap: () {
+                          _searchController.clear();
+                          _changeText = false;
+                          setState(() {});
+                      },
+                      child: SizedBox(
+                        width: 24.0,
+                        height: 24.0,
+                        child: Center(
+                          child: _changeText ? const Icon(Icons.close, size: 20,) : null,
+                        ),
+                      ),
+
+                    )
+
+
                 ),
               ),
               const SizedBox(height:16.0),
