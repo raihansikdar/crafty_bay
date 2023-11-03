@@ -212,7 +212,7 @@ craftybay_ecommerce_application/
 
 [Rabbil Hasan](https://github.com/rupomsoft) for his enlightening prerecorded classes and [Rafat Jamader Meraz](https://github.com/RafatMeraz) or teaching me how to make UI like this and the API integration seamless.
 
-### A heartfelt thanks to my classmate:
+### A heartfelt thanks :
 
-[Moniruzzaman](https://github.com/moniruzzaman76) & [Mujahedul Islam](https://github.com/muj-i) to share their knowledges with me & help me complete the project.
+[Hasan Ahmed](https://github.com/HasanJuned)) & [Md Alhaz Mondal Hredhay](https://github.com/hredhayxz) to share their knowledges with me & help me complete the project.
 
