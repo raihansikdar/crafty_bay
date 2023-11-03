@@ -214,5 +214,5 @@ craftybay_ecommerce_application/
 
 ### A heartfelt thanks :
 
-[Hasan Ahmed](https://github.com/HasanJuned)) & [Md Alhaz Mondal Hredhay](https://github.com/hredhayxz) to share their knowledges with me & help me complete the project.
+[Hasan Ahmed](https://github.com/HasanJuned) & [Md Alhaz Mondal Hredhay](https://github.com/hredhayxz) to share their knowledges with me & help me complete the project.
 
