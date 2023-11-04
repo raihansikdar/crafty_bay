@@ -64,7 +64,7 @@ git clone https://github.com/raihansikdar/crafty_bay
 2. Navigate to the project folder:
 
 ```bash
-cd craftybay_ecommerce_application
+cd crafty_bay
 ```
 
 3. Install dependencies:
@@ -89,7 +89,7 @@ CraftyBay integrates the following packages to enhance functionality:
 - `cached_network_image: ^3.3.0`: For network image caching and showing.
 - `get: ^4.6.5`: Get is a state management library for Flutter that simplifies the process of managing application state. It provides a clean and efficient way to handle state and dependencies in your app.
 - `pin_code_fields: ^8.0.1`: Pin Code Fields is a Flutter package that helps you implement PIN or OTP input fields in your app. It's highly customizable and easy to use for user authentication and verification.
-- `connectivity_plus: ^5.0.1`: Connectivity Plus is a Flutter package for monitoring network connectivity. It helps you check the status of the device's network connection and react to changes in connectivity.
+- `connectivity_plus: ^5.0.0`: Connectivity Plus is a Flutter package for monitoring network connectivity. It helps you check the status of the device's network connection and react to changes in connectivity.
 - `flutter_launcher_icons: ^0.13.1`: This package simplifies the process of generating and setting app icons for your Flutter application. It allows you to customize app icons with ease.
 - `carousel_slider: ^4.2.1`: Carousel Slider is a package for creating image carousels and sliders in your Flutter app. It's useful for creating interactive and dynamic image galleries.
 - `shared_preferences: ^2.2.1`: Shared Preferences is a Flutter package for persisting simple key-value data in a platform-agnostic manner. It's commonly used for storing app settings and small amounts of data.
