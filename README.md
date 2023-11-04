@@ -58,7 +58,7 @@ Follow these steps to run the News Read Application:
 1. Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/hredhayxz/craftybay_ecommerce_application.git
+git clone https://github.com/raihansikdar/crafty_bay
 ```
 
 2. Navigate to the project folder:
