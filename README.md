@@ -30,6 +30,8 @@ During the development of CraftyBay, several challenges were encountered, includ
 
 ## How Challenges Were Overcome
 To address these challenges, several strategies and solutions were implemented:
+ 
+  - Payment Gateway Integration: Integrating a secure and efficient payment gateway to facilitate smooth and trustworthy transactions, further enhancing the overall user experience.
 
  - User Authentication and Data Security: Tackling the intricate task of safeguarding user tokens and personal information to maintain the highest standards of data privacy and fortify user account protection.
 
@@ -38,8 +40,6 @@ To address these challenges, several strategies and solutions were implemented:
 
  - State Management and API Optimization: Striving for streamlined state management within the application while optimizing API calls to enhance performance, reduce data consumption, and create a more 
    responsive user experience.
-
- - Payment Gateway Integration: Integrating a secure and efficient payment gateway to facilitate smooth and trustworthy transactions, further enhancing the overall user experience.
 
  - Reducing API calls: To optimize app performance, we've reduced the number of API calls where data is fetched and updated only when needed, reducing app data consumption and enhancing user experience.
 
