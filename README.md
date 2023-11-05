@@ -22,7 +22,7 @@ As the creator of CraftyBay, I assumed the following core responsibilities:
 ## Challenges Faced
 During the development of CraftyBay, several challenges were encountered, including:
 
- - Payment Gateway Integration: Integrating a secure and efficient payment gateway to facilitate smooth and trustworthy transactions, further enhancing the overall user experience.
+ - ####Payment Gateway Integration: Integrating a secure and efficient payment gateway to facilitate smooth and trustworthy transactions, further enhancing the overall user experience.
 
  - User Authentication and Data Security: Tackling the intricate task of safeguarding user tokens and personal information to maintain the highest standards of data privacy and fortify user account protection.
 
