@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/home/slider/slider_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
@@ -17,6 +19,9 @@ class CarouselSliderController extends GetxController{
     _iSliderInProgress = true;
     update();
     NetworkResponse response = await NetworkCaller.getRequest(Urls.carouselSliderCard);
+
+    log("carouselSliderControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("carouselSliderControllerGetRequest body ==> ${response.body}");
 
     _iSliderInProgress = false;
 

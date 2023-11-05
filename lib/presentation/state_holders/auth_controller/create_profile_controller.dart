@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/product_review_model.dart';
 import 'package:crafty_bay/data/models/read_profile_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
@@ -49,6 +51,11 @@ class CreateProfileController extends GetxController{
       "ship_phone": shipPhone
     };
     NetworkResponse response = await NetworkCaller.postRequest(Urls.createUserProfile, requestBody);
+
+    log("profilePostRequest statusCode ==> ${response.statusCode}");
+    log("profilePostRequest body ==> ${response.body}");
+
+
     _isCreateProfileInProgress = false;
 
     if(response.isSuccess){

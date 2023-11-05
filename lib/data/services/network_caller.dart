@@ -14,8 +14,8 @@ class NetworkCaller{
    try{
      Response response = await get(Uri.parse(url),headers: {'Content-Type': 'application/json','token': AuthUtilityController.accessToken.toString()}); //headers: {'Content-Type': 'application/json','token':AuthUtility.userInfo.token.toString()
 
-    log("getRequest statusCode ==> ${response.statusCode}");
-     log("getRequest body ==> ${response.body}");
+    // log("getRequest statusCode ==> ${response.statusCode}");
+    //  log("getRequest body ==> ${response.body}");
 
      if(response.statusCode == 200 && jsonDecode(response.body)['msg'] == 'success'){
        return NetworkResponse(isSuccess: true, statusCode: response.statusCode, body: jsonDecode(response.body));
@@ -37,8 +37,8 @@ class NetworkCaller{
     try{
       Response response = await post(Uri.parse(url),headers: {'Content-Type': 'application/json','token': AuthUtilityController.accessToken.toString()}, body: jsonEncode(body)); // 'token': AuthUtility.userInfo.token.toString()
 
-      log("postRequest statusCode ==> ${response.statusCode}");
-      log("postRequest body ==> ${response.body}");
+      // log("postRequest statusCode ==> ${response.statusCode}");
+      // log("postRequest body ==> ${response.body}");
 
       if(response.statusCode == 200 && jsonDecode(response.body)['msg'] == 'success'){
         return NetworkResponse(isSuccess: true, statusCode: response.statusCode, body: jsonDecode(response.body));

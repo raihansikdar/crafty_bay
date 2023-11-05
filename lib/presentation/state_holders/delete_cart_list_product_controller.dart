@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
 import 'package:crafty_bay/data/utility/urls.dart';
@@ -9,6 +11,10 @@ class DeleteCartListProductController extends GetxController{
 
   Future<bool> deleteCartProduct({required int productId}) async{
      NetworkResponse response = await NetworkCaller.getRequest(Urls.deleteCartListProduct(productId: productId));
+
+     log("deleteCartListControllerGetRequest statusCode ==> ${response.statusCode}");
+     log("deleteCartListControllerGetRequest body ==> ${response.body}");
+
      if(response.isSuccess){
        return true;
      }else{

@@ -1,6 +1,7 @@
 import 'package:crafty_bay/presentation/state_holders/auth_controller/email_verification_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/otp_verification_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
+import 'package:crafty_bay/presentation/ui/widgets/circular_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -92,25 +93,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
                         },
                         child: controller.emailVerificationInProgress ?
-                        const Center(
-                          child:  Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.white,
-                                      strokeWidth: 4,
-                                    )),
-                              ),
-                              SizedBox(width: 30,),
-                              Text("Please wait",style: TextStyle(
-                                color: Colors.white,
-                              ),),
-                            ],),
-                        )
+                        const CircularButtonWidget(textTitle: 'Please wait',)
                             : const Text("Next"),
                       );
                     }
@@ -143,3 +126,5 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     }
   }
 }
+
+

@@ -1,5 +1,5 @@
 import 'package:crafty_bay/data/models/home/popular/product_model.dart';
-import 'package:crafty_bay/presentation/state_holders/product_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/product_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/constants.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';

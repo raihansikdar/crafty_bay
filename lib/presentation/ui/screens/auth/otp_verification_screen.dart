@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:crafty_bay/presentation/state_holders/auth_controller/email_verification_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/auth_controller/otp_verification_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/auth_controller/read_profile_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/timer_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/create_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
+import 'package:crafty_bay/presentation/ui/widgets/circular_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -135,25 +135,8 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                               verifyOtp(controller);
 
                             },
-                            child: controller.otpInProgress ?  const Center(
-                              child:  Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                          height: 20,
-                                        width: 20,
-                                        child: CircularProgressIndicator(
-                                          color: Colors.white,
-                                          strokeWidth: 4,
-                                        )),
-                                  ),
-                                  SizedBox(width: 30,),
-                                Text("Please wait",style: TextStyle(
-                                  color: Colors.white,
-                                ),),
-                              ],),
-                            ) : const Text("Next"),
+                            child: controller.otpInProgress ? CircularButtonWidget(textTitle: 'Please wait',)
+                                : const Text("Next"),
                           );
                         }
                       ),
@@ -186,21 +169,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                        ),)
                      ],
                    ),
-                   // Obx(() =>  RichText(
-                   //   text:  TextSpan(
-                   //       style: const TextStyle(color: Colors.grey),
-                   //       children: [
-                   //         const TextSpan(text: 'This code will expire in '),
-                   //         TextSpan(
-                   //           text: timer.time.value,
-                   //           style: const TextStyle(
-                   //             color: AppColors.primaryColor,
-                   //             fontWeight: FontWeight.bold,
-                   //           ),
-                   //         ),
-                   //       ]
-                   //   ),
-                   // ),),
+
                     const SizedBox(height: 16.0,),
                     SizedBox(
                      height: 40,

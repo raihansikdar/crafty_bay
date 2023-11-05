@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
 import 'package:crafty_bay/data/utility/urls.dart';
@@ -20,6 +22,11 @@ class AddToCartController extends GetxController{
         "qty": quanity,
     };
     final NetworkResponse response = await NetworkCaller.postRequest(Urls.addToCard, requestBody);
+
+    log("addToCartPostRequest statusCode ==> ${response.statusCode}");
+    log("addToCartPostRequest body ==> ${response.body}");
+
+
     _isAddToCartInProgress = false;
     update();
 

@@ -14,9 +14,9 @@ import 'package:crafty_bay/presentation/state_holders/payment_controller/create_
 import 'package:crafty_bay/presentation/state_holders/product_controller/new_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/special_product_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/product_details_controlller.dart';
-import 'package:crafty_bay/presentation/state_holders/product_list_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/product_review_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/product_details_controlller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/product_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/product_review_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/theme_mode_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:get/get.dart';

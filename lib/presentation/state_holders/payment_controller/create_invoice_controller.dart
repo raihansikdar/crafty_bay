@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/payment/incoive_create_response_model.dart';
 import 'package:crafty_bay/data/models/payment/invoice_create_data.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
@@ -19,6 +21,10 @@ class CreateInvoiceController extends GetxController{
     _isCreateInvoiceInProgress = true;
     update();
     NetworkResponse response = await NetworkCaller.getRequest(Urls.createInvoice);
+
+    log("createInvoiceControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("createInvoiceControllerGetRequest body ==> ${response.body}");
+
     _isCreateInvoiceInProgress = false;
 
     if(response.isSuccess){

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/product_review_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
@@ -18,6 +20,9 @@ class ProductReviewController extends GetxController{
     update();
 
     NetworkResponse response = await NetworkCaller.getRequest(Urls.getProductReview(productId: productId));
+
+    log("productReviewControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("productReviewControllerGetRequest body ==> ${response.body}");
 
     _isProductReviewInProgress = false;
 

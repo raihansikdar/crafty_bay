@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/home/popular/product_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
@@ -18,6 +20,10 @@ class PopularProductController extends GetxController{
     update();
 
     NetworkResponse response = await NetworkCaller.getRequest(Urls.getProductByRemark(remark: 'popular'));
+
+    log("popularProductControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("popularProductControllerGetRequest body ==> ${response.body}");
+
 
     _isPopularInProgress = false;
     if(response.isSuccess){

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/wish_list_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
@@ -16,6 +18,10 @@ class CreateWishListController extends GetxController{
     _isCreateWishListInProgress = true;
     update();
     NetworkResponse response = await NetworkCaller.getRequest(Urls.createWishList(productId: productId));
+
+    log("createWishListControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("createWishListControllerGetRequest body ==> ${response.body}");
+
     _isCreateWishListInProgress = false;
 
     if(response.isSuccess){

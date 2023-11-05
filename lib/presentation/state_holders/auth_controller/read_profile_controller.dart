@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/product_review_model.dart';
 import 'package:crafty_bay/data/models/read_profile_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
@@ -19,6 +21,10 @@ class ReadProfileController extends GetxController{
     update();
 
     NetworkResponse response = await NetworkCaller.getRequest(Urls.readUserProfile);
+
+    log("readProfileControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("readProfileControllerGetRequest body ==> ${response.body}");
+
     _isReadProfileInProgress = false;
 
     if(response.isSuccess){

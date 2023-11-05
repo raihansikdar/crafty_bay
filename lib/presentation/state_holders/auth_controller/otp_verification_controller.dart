@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
 import 'package:crafty_bay/data/utility/urls.dart';
@@ -17,6 +19,10 @@ class OtpVerificationController extends GetxController{
       update();
 
       NetworkResponse response = await NetworkCaller.getRequest(Urls.verifyOtp(email: email, otp: otp));
+
+      log("otpControllerGetRequest statusCode ==> ${response.statusCode}");
+      log("otpControllerGetRequest body ==> ${response.body}");
+
       _otpInProgress = false;
       update();
       if(response.isSuccess){

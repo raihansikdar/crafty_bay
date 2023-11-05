@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -68,7 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(width: 8.0,),
             CircularIconButton(
               icon: Icons.call,
-              onTap: (){},
+              onTap: (){
+                _lunchPhoneUrl(phoneNumber: "01845565746");
+              },
             ),
             const SizedBox(width: 8.0,),
             CircularIconButton(
@@ -247,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           : ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        itemCount: _categoryController.categoryModel.data?.length ?? 0,
+                        itemCount: getLength(_categoryController.categoryModel.data?.length ?? 0),
                         itemBuilder: (context, index) {
                           return CategoryCard(
                             image: _categoryController.categoryModel.data?[index].categoryImg ?? '',
@@ -266,35 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(vertical: 8),
-              //   child: GetBuilder<PopularProductController>(
-              //     builder: (_popularProductController) {
-              //       return _popularProductController.isPopularInProgress ?
-              //          Row(
-              //            children: [
-              //              Container(
-              //                height: 20,
-              //                width: 60,
-              //                color: Colors.grey.shade200,
-              //              ),
-              //              Spacer(),
-              //              Container(
-              //                height: 20,
-              //                width: 40,
-              //                color: Colors.grey.shade200,
-              //              )
-              //            ],
-              //          )
-              //           : SectionHeader(
-              //         title: 'Popular',
-              //         onTap: () {
-              //          Get.to(()=> ProductListScreenByRemarks(productData: _popularProductController.popularProductModel.data ?? []),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
-              //         },
-              //       );
-              //     }
-              //   ),
-              // ),
+
               SectionHeader(
                 title: 'Popular',
                 onTap: () {
@@ -307,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 170,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        itemCount: getLength(_popularProductController.popularProductModel.data?.length ?? 4),
+                        itemCount: getLength(_popularProductController.popularProductModel.data?.length ?? 0),
                         itemBuilder: (context, index) {
                           return _popularProductController.isPopularInProgress
                               ? const ShimmerCard()
@@ -330,16 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
               ),
-              // GetBuilder<SpecialProductController>(
-              //     builder: (_specialProductController) {
-              //       return SectionHeader(
-              //         title: 'Special',
-              //         onTap: () {
-              //           Get.to(()=> ProductListScreenByRemarks(productData: _specialProductController.specialProductModel.data ?? []),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
-              //         },
-              //       );
-              //     }
-              // ),
+
               SectionHeader(
                 title: 'Special',
                 onTap: () {
@@ -352,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 170,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: getLength(_specialProductController.specialProductModel.data?.length ?? 4),
+                      itemCount: getLength(_specialProductController.specialProductModel.data?.length ?? 0),
                       itemBuilder: (context, index) {
                       return _specialProductController.isSpecialInProgress ? const ShimmerCard() : ProductCard(
                         image: _specialProductController.specialProductModel.data?[index].image ?? '',
@@ -373,16 +339,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
               ),
-              // GetBuilder<NewProductController>(
-              //     builder: (_newProductController) {
-              //       return SectionHeader(
-              //         title: 'New',
-              //         onTap: () {
-              //           Get.to(()=> ProductListScreenByRemarks(productData: _newProductController.newProductModel.data ?? []),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
-              //         },
-              //       );
-              //     }
-              // ),
+
               SectionHeader(
                 title: 'New',
                 onTap: () {
@@ -395,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 170,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: getLength(_newProductController.newProductModel.data?.length ?? 4),
+                      itemCount: getLength(_newProductController.newProductModel.data?.length ?? 0),
                       itemBuilder: (context, index) {
                       return _newProductController.isNewInProgress ? const ShimmerCard() : ProductCard(
                         image: _newProductController.newProductModel.data?[index].image ?? '',
@@ -423,5 +380,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   int getLength (int length){
     return length > 4 ? 4 : length;
+  }
+
+  _lunchPhoneUrl({required String phoneNumber}) async{
+    String url = 'tel:$phoneNumber';
+    try{
+      if(await canLaunchUrl(Uri.parse(url))){
+        await launchUrl(Uri.parse(url));
+      }else{
+        Get.snackbar("Error Occurred", "Can't be launch");
+      }
+
+    }catch(e){
+      Get.snackbar("Error Occurred", "Can't be launch: $e");
+    }
   }
 }

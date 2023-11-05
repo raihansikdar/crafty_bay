@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/cart_list_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
@@ -21,6 +23,10 @@ class CartListController extends GetxController{
     update();
 
     NetworkResponse response = await NetworkCaller.getRequest(Urls.getCartList);
+
+    log("cartListControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("cartListControllerGetRequest body ==> ${response.body}");
+
 
     _isCartListInProgress = false;
 

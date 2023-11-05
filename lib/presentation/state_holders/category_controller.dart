@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/home/category/category_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
@@ -17,6 +19,10 @@ class CategoryController extends GetxController{
     _isCategoryInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(Urls.getCategoryList);
+
+    log("categoryControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("categoryControllerGetRequest body ==> ${response.body}");
+
 
     _isCategoryInProgress = false;
     if(response.isSuccess){

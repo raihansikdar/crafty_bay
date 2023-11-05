@@ -4,6 +4,7 @@ import 'package:crafty_bay/presentation/ui/screens/auth/otp_verification_screen.
 import 'package:crafty_bay/presentation/ui/screens/auth/read_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
+import 'package:crafty_bay/presentation/ui/widgets/circular_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -74,7 +75,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body:_isLoading ? const Center(child: CircularProgressIndicator()) : SafeArea(
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -125,7 +126,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         labelStyle:TextStyle(
                           color: Colors.grey.shade500,
                         ),
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16,
                           vertical: 16,
                         ),
@@ -296,7 +297,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         labelStyle:TextStyle(
                           color: Colors.grey.shade500,
                         ),
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16,
                           vertical: 16,
                         ),
@@ -434,7 +435,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                );
                           if(response == true){
 
-                                 Get.to(()=> MainBottomNavScreen());
+                                 Get.to(()=> const MainBottomNavScreen());
                                } else{
                                  if(mounted){
                                    ScaffoldMessenger.of(context).showSnackBar(
@@ -450,25 +451,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                              }
                             },
                             child: _createProfileController.isCreateProfileInProgress ?
-                            Center(
-                              child:  Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                        height: 20,
-                                        width: 20,
-                                        child: CircularProgressIndicator(
-                                          color: Colors.white,
-                                          strokeWidth: 4,
-                                        )),
-                                  ),
-                                  SizedBox(width: 30,),
-                                  Text("Please wait",style: TextStyle(
-                                    color: Colors.white,
-                                  ),),
-                                ],),
-                            )
+                            const CircularButtonWidget(textTitle: "Please wait")
                                 : const Text("Next"),
                           ),
                         );

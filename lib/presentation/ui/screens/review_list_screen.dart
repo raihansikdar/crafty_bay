@@ -1,5 +1,5 @@
 import 'package:crafty_bay/data/models/product_review_model.dart';
-import 'package:crafty_bay/presentation/state_holders/product_review_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/product_review_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/review_add_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
 import 'package:crafty_bay/presentation/ui/utility/constants.dart';

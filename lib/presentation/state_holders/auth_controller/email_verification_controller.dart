@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
 import 'package:crafty_bay/data/utility/urls.dart';
@@ -15,6 +17,9 @@ class EmailVerificationController extends GetxController{
     update();
 
     final NetworkResponse response = await NetworkCaller.getRequest(Urls.verifyEmail(email: email));
+
+    log("emailControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("emailControllerGetRequest body ==> ${response.body}");
 
     _emailVerificationInProgress = false;
     update();

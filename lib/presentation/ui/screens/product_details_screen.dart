@@ -2,7 +2,7 @@ import 'package:crafty_bay/data/models/home/popular/product_data.dart';
 import 'package:crafty_bay/data/models/product_details/product_details_data.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/product_details_controlller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/product_details_controlller.dart';
 import 'package:crafty_bay/presentation/ui/screens/cart_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/review_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';

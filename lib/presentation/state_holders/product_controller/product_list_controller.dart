@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/home/popular/product_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:crafty_bay/data/services/network_response.dart';
@@ -19,6 +21,11 @@ class ProductListController extends GetxController {
     _isProductsInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(Urls.getProductByCategory(categoryId:categoryId));
+
+    log("productListControllerGetRequest statusCode ==> ${response.statusCode}");
+    log("productListControllerGetRequest body ==> ${response.body}");
+
+
     _isProductsInProgress = false;
     if (response.isSuccess) {
       _productModel = ProductModel.fromJson(response.body ?? {});
