@@ -43,8 +43,8 @@ class _ProductCarouselSliderWidgetState extends State<ProductCarouselSliderWidge
                     ),
                     child: CachedNetworkImage(
                       imageUrl:  imageUrl ?? '',
-                      placeholder:(context,url)=> SvgPicture.asset(AssetsPath.cadreBlackSVG) ,
-                      errorWidget: (context, url, error) => const Icon(Icons.image),
+                      placeholder:(context,url)=> SvgPicture.asset(AssetsPath.craftybayLogoSVG) ,
+                      errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
                     ),
 
                 );

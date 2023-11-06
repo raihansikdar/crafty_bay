@@ -26,5 +26,6 @@ class Urls{
 
 
   static String createInvoice = "$_baseUrl/InvoiceCreate";
+  static String invoiceList = "$_baseUrl/InvoiceList";
 
 }

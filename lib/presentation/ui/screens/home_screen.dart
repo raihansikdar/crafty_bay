@@ -1,5 +1,6 @@
 import 'package:crafty_bay/application/app.dart';
 import 'package:crafty_bay/data/models/home/popular/product_data.dart';
+import 'package:crafty_bay/presentation/state_holders/auth_controller/auth_utility_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/carousel_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
@@ -8,6 +9,7 @@ import 'package:crafty_bay/presentation/state_holders/product_controller/popular
 import 'package:crafty_bay/presentation/state_holders/product_controller/special_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/create_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/read_profile_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/payment/invoice_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen_by_remarks.dart';
@@ -41,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // logo fix
         backgroundColor: Colors.white,
         elevation: 0,
         title: Row(
@@ -76,7 +79,32 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(width: 8.0,),
             CircularIconButton(
               icon: Icons.notifications_active_outlined,
-              onTap: (){},
+              onTap: (){
+                Get.to(()=> InvoiceListScreen());
+              },
+            ),
+            const SizedBox(width: 8.0,),
+            CircularIconButton(
+              icon: Icons.logout,
+              onTap: () async {
+                if(AuthUtilityController.accessToken != null){
+                  await AuthUtilityController.clearInfo();
+                  await AuthUtilityController.getAccessToken();
+                  Get.snackbar(
+                    'Success', 'Logout successful.',
+                     backgroundColor: Colors.red.withOpacity(0.5),
+                     colorText: Colors.white,
+                  );
+                }else{
+                  Get.snackbar(
+                  'Alert', 'You are not logged!',
+                   backgroundColor: AppColors.primaryColor.withOpacity(0.5),
+                    colorText: Colors.white,
+                  );
+                }
+
+
+              },
             ),
           ],
         ),
@@ -141,9 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Center(
                             child: Opacity(
-                              opacity: 0.03,
+                              opacity: 0.05,
                               child: SvgPicture.asset(
-                                AssetsPath.cadreBlackSVG,
+                                AssetsPath.craftybayLogoSVG,
                                 width: double.infinity,
                                 height: 180,
                                 fit: BoxFit.cover,
@@ -197,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: FittedBox(
                                       child: Center(
                                         child: SvgPicture.asset(
-                                          AssetsPath.cadreBlackSVG,
+                                          AssetsPath.craftybayLogoSVG,
                                           width: 80,
                                           height: 50,
                                           fit: BoxFit.cover,
@@ -282,7 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 170,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        itemCount: getLength(_popularProductController.popularProductModel.data?.length ?? 0),
+                        itemCount: getLength(_popularProductController.popularProductModel.data?.length ?? 4),
                         itemBuilder: (context, index) {
                           return _popularProductController.isPopularInProgress
                               ? const ShimmerCard()
@@ -318,7 +346,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 170,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: getLength(_specialProductController.specialProductModel.data?.length ?? 0),
+                      itemCount: getLength(_specialProductController.specialProductModel.data?.length ?? 4),
                       itemBuilder: (context, index) {
                       return _specialProductController.isSpecialInProgress ? const ShimmerCard() : ProductCard(
                         image: _specialProductController.specialProductModel.data?[index].image ?? '',
@@ -352,7 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 170,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: getLength(_newProductController.newProductModel.data?.length ?? 0),
+                      itemCount: getLength(_newProductController.newProductModel.data?.length ?? 4),
                       itemBuilder: (context, index) {
                       return _newProductController.isNewInProgress ? const ShimmerCard() : ProductCard(
                         image: _newProductController.newProductModel.data?[index].image ?? '',

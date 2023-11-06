@@ -3,6 +3,7 @@ import 'package:crafty_bay/presentation/state_holders/auth_controller/read_profi
 import 'package:crafty_bay/presentation/ui/screens/auth/otp_verification_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/read_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/payment/invoice_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/widgets/circular_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -409,53 +410,73 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       },
                     ),
                     const SizedBox(height: 16.0,),
-                    GetBuilder<CreateProfileController>(
-                      builder: (_createProfileController) {
-                        return SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                             if(_formKey.currentState!.validate()){
-                               final response = await _createProfileController.createUserProfile(
-                                  cusName: _cusNameController.text.trim(),
-                                  cusAdd: _cusAddController.text.trim(),
-                                  cusCity: _cusCityController.text.trim(),
-                                  cusState: _cusStateController.text.trim(),
-                                  cusPostcode: _cusPostcodeController.text.trim(),
-                                  cusCountry: _cusCountryController.text.trim(),
-                                  cusPhone: _cusPhoneController.text.trim(),
-                                  cusFax: _cusFaxController.text.trim(),
-                                  shipName: _shipNameController.text.trim(),
-                                  shipAdd: _shipAddController.text.trim(),
-                                  shipCity: _shipCityController.text.trim(),
-                                  shipState: _shipStateController.text.trim(),
-                                  shipPostcode: _shipPostcodeController.text.trim(),
-                                  shipCountry: _shipCountryController.text.trim(),
-                                  shipPhone: _shipPhoneController.text.trim(),
-                               );
-                          if(response == true){
-
-                                 Get.to(()=> const MainBottomNavScreen());
-                               } else{
-                                 if(mounted){
-                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                       content: Text(
-                                         _createProfileController.errorMessage,
-                                       ),
-                                     ),
+                    Row(
+                      children: [
+                        GetBuilder<CreateProfileController>(
+                          builder: (_createProfileController) {
+                            return SizedBox(
+                              width: 230,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                 if(_formKey.currentState!.validate()){
+                                   final response = await _createProfileController.createUserProfile(
+                                      cusName: _cusNameController.text.trim(),
+                                      cusAdd: _cusAddController.text.trim(),
+                                      cusCity: _cusCityController.text.trim(),
+                                      cusState: _cusStateController.text.trim(),
+                                      cusPostcode: _cusPostcodeController.text.trim(),
+                                      cusCountry: _cusCountryController.text.trim(),
+                                      cusPhone: _cusPhoneController.text.trim(),
+                                      cusFax: _cusFaxController.text.trim(),
+                                      shipName: _shipNameController.text.trim(),
+                                      shipAdd: _shipAddController.text.trim(),
+                                      shipCity: _shipCityController.text.trim(),
+                                      shipState: _shipStateController.text.trim(),
+                                      shipPostcode: _shipPostcodeController.text.trim(),
+                                      shipCountry: _shipCountryController.text.trim(),
+                                      shipPhone: _shipPhoneController.text.trim(),
                                    );
-                                 }
-                               }
+                              if(response == true){
+                                if(mounted){
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        "Succesully update profile",
+                                      ),
+                                    ),
+                                  );
+                                }
+                                     Get.to(()=> const MainBottomNavScreen());
+                                   } else{
+                                     if(mounted){
+                                       ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                           content: Text(
+                                             _createProfileController.errorMessage,
+                                           ),
+                                         ),
+                                       );
+                                     }
+                                   }
 
-                             }
-                            },
-                            child: _createProfileController.isCreateProfileInProgress ?
-                            const CircularButtonWidget(textTitle: "Please wait")
-                                : const Text("Next"),
-                          ),
-                        );
-                      }
+                                 }
+                                },
+                                child: _createProfileController.isCreateProfileInProgress ?
+                                const CircularButtonWidget(textTitle: "Please wait")
+                                    : const Text("Update Profile"),
+                              ),
+                            );
+                          }
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          width: 120,
+                          child: OutlinedButton(
+                            onPressed: (){
+                            Get.to(()=> const InvoiceListScreen());
+                          }, child: const Text("Invoice List"),),
+                        ),
+                      ],
                     ),
                   ],
                 ),

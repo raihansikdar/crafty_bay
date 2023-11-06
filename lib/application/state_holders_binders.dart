@@ -11,6 +11,7 @@ import 'package:crafty_bay/presentation/state_holders/create_wish_list_controlle
 import 'package:crafty_bay/presentation/state_holders/delete_cart_list_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/payment_controller/create_invoice_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/payment_controller/invoice_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/new_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/special_product_controller.dart';
@@ -45,5 +46,6 @@ class StateHolderBinder extends Bindings{
     Get.put(CreateProfileController());
     Get.put(ThemeModeController());
     Get.put(CreateInvoiceController());
+    Get.put(InvoiceListController());
   }
 }

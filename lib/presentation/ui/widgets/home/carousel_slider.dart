@@ -101,7 +101,7 @@ class CustomCachedImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(16.0),
       child: CachedNetworkImage(
         imageUrl: imageUrl,height: double.infinity,width: double.infinity, // Provide the URL of the image
-        placeholder: (context, url) => SvgPicture.asset(AssetsPath.cadreBlackSVG),
+        placeholder: (context, url) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
         errorWidget: (context, url, error) => SvgPicture.asset(AssetsPath.craftybayLogoSVG),
         fit: BoxFit.cover, // You can adjust this to your needs
       ),

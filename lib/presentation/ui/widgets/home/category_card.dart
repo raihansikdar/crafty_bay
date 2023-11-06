@@ -31,7 +31,7 @@ class CategoryCard extends StatelessWidget {
               ),
               child:  CachedNetworkImage(
                   imageUrl: image,
-                  placeholder:(context,url)=> SvgPicture.asset(AssetsPath.cadreBlackSVG) ,
+                  placeholder:(context,url)=> SvgPicture.asset(AssetsPath.craftybayLogoSVG) ,
                 errorWidget: (context, url, error) => const Icon(Icons.image),
               ),
             ),

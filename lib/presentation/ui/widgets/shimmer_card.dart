@@ -19,9 +19,9 @@ class ShimmerCard extends StatelessWidget {
             child: FittedBox(
               child: Center(
                 child: SvgPicture.asset(
-                  AssetsPath.cadreBlackSVG,
-                  width: 80,
-                  height: 50,
+                  AssetsPath.craftybayLogoSVG,
+                  width: 100,
+                 // height: 50,
                   fit: BoxFit.cover,
                 ),
               ),
