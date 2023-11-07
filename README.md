@@ -49,28 +49,38 @@ CraftyBay is continuously evolving to enhance the shopping experience for users,
 
 
 ## CraftyBay UI
-![Alt Text](screenshots/1.jpg)
-![Alt Text](screenshots/2.jpg)
-![Alt Text](screenshots/3.jpg)
-![Alt Text](screenshots/4.jpg)
-![Alt Text](screenshots/5.jpg)
-![Alt Text](screenshots/6.jpg)
-![Alt Text](screenshots/7.jpg)
-![Alt Text](screenshots/8.jpg)
-![Alt Text](screenshots/9.jpg)
-![Alt Text](screenshots/10.jpg)
-![Alt Text](screenshots/11.jpg)
-![Alt Text](screenshots/12.jpg)
-![Alt Text](screenshots/13.jpg)
-![Alt Text](screenshots/14.jpg)
-![Alt Text](screenshots/15.jpg)
-![Alt Text](screenshots/16.jpg)
-![Alt Text](screenshots/17.jpg)
-![Alt Text](screenshots/18.jpg)
-![Alt Text](screenshots/19.jpg)
-![Alt Text](screenshots/20.jpg)
-![Alt Text](screenshots/21.jpg)
-![Alt Text](screenshots/22.jpg)
+
+
+<div style="display: flex; flex-wrap: wrap;">
+  <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/1.jpg" width="200" />
+  <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/2.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/3.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/22.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/4.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/5.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/6.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/7.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/8.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/9.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/10.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/11.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/12.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/13.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/14.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/15.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/16.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/17.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/18.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/19.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/20.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/21.jpg" width="200" />
+ 
+
+</div>
+
+
+
+
 
 ## Getting Started
 
