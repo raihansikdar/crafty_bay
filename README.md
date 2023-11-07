@@ -50,6 +50,27 @@ CraftyBay is continuously evolving to enhance the shopping experience for users,
 
 ## CraftyBay UI
 ![Alt Text](screenshots/1.jpg)
+![Alt Text](screenshots/2.jpg)
+![Alt Text](screenshots/3.jpg)
+![Alt Text](screenshots/4.jpg)
+![Alt Text](screenshots/5.jpg)
+![Alt Text](screenshots/6.jpg)
+![Alt Text](screenshots/7.jpg)
+![Alt Text](screenshots/8.jpg)
+![Alt Text](screenshots/9.jpg)
+![Alt Text](screenshots/10.jpg)
+![Alt Text](screenshots/11.jpg)
+![Alt Text](screenshots/12.jpg)
+![Alt Text](screenshots/13.jpg)
+![Alt Text](screenshots/14.jpg)
+![Alt Text](screenshots/15.jpg)
+![Alt Text](screenshots/16.jpg)
+![Alt Text](screenshots/17.jpg)
+![Alt Text](screenshots/18.jpg)
+![Alt Text](screenshots/19.jpg)
+![Alt Text](screenshots/20.jpg)
+![Alt Text](screenshots/21.jpg)
+![Alt Text](screenshots/22.jpg)
 
 ## Getting Started
 
