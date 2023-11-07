@@ -49,7 +49,7 @@ CraftyBay is continuously evolving to enhance the shopping experience for users,
 
 
 ## CraftyBay UI
-![all (1)](https://github.com/hredhayxz/craftybay_ecommerce_application/assets/60058949/88d4de63-ec05-4cae-a817-c17c440321ef)
+![Alt Text](screenshots/1.jpg)
 
 ## Getting Started
 
