@@ -38,22 +38,25 @@ class _CraftyBayState extends State<CraftyBay> {
          message: 'Please check your internet connectivity',
          isDismissible: false,
        ));
+
        // Get.defaultDialog(
-       //   title: "Alert",
-       //   middleText: "No internet connection",
-       //   textConfirm: "Try Again",
-       //   textCancel: "Cancel",
-       //   confirmTextColor: Colors.white,
-       //   buttonColor: Colors.blue,
-       //   onConfirm: () => checkInternetConnectivityStatus(),
-       //   onCancel: () => Get.back(),
+       //   title: "No Internet",
+       //   middleText: "Please check your internet connection.",
+       //   barrierDismissible: false,
+       //   titleStyle: const TextStyle(color: Colors.red),
        // );
+
+
+
      }else{
-       //print("object");
+     // Get.back();
+
        if (Get.isSnackbarOpen) {
          Get.closeAllSnackbars();
        }
      }
+
+
    }
 
    @override
@@ -66,11 +69,7 @@ class _CraftyBayState extends State<CraftyBay> {
   @override
   Widget build(BuildContext context) {
 
-  /*  // Get the screen size
-    Size size = MediaQuery.of(context).size;
-    // Set the screen width and height in the ScreenSizes utility class
-    ScreenSizes.screenWidth = size.width;
-    ScreenSizes.screenHeight = size.height;*/
+
 
     return ValueListenableBuilder(
         valueListenable:themeModeController.themeMode,

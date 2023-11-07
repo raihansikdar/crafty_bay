@@ -3,6 +3,7 @@ import 'package:crafty_bay/data/models/product_details/product_details_data.dart
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_controller/product_details_controlller.dart';
+import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/cart_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/review_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_palette.dart';
@@ -141,8 +142,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 return InkWell(
                                   onTap: (){
                                     tabWish = !tabWish;
+                                    if(tabWish == true){
+                                      Get.snackbar("Added", "WishList is successfully added");
+                                      _createWishListController.createWishListProduct(productId: widget.productId);
+                                    }else{
+                                      Get.snackbar("Remove", "WishList is successfully remove");
+                                      Get.find<WishListController>().deleteWishList(productId: widget.productId);
+                                    }
                                     setState(() {});
-                                    _createWishListController.createWishListProduct(productId: widget.productId);
+
                                   },
                                   child:  Card(
                                     color: AppColors.primaryColor,
@@ -272,7 +280,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -286,7 +294,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 height: 4,
               ),
               Text(
-                '\$1000',
+               "\$ ${ productDetailsData.product?.price ?? ''}",
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,

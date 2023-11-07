@@ -53,9 +53,22 @@ class _WishListScreenState extends State<WishListScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8.0),
           child: GetBuilder<WishListController>(
             builder: (_wishListController) {
-              return _wishListController.isWishListInProgress ?
-              const Center(child: CircularProgressIndicator())
-                  : GridView.builder(
+              if(_wishListController.isWishListInProgress){
+                return Center(child: CircularProgressIndicator());
+              }else if(_wishListController.wishListModel.data != null && _wishListController.wishListModel.data!.isEmpty){
+                return Center(child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/error.gif",
+                      height: 60,
+                      width: 60,
+                    ),
+                    Text("Wish List is Empty"),
+                  ],
+                ));
+              }
+              return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 16.0,

@@ -410,73 +410,69 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       },
                     ),
                     const SizedBox(height: 16.0,),
-                    Row(
-                      children: [
-                        GetBuilder<CreateProfileController>(
-                          builder: (_createProfileController) {
-                            return SizedBox(
-                              width: 230,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                 if(_formKey.currentState!.validate()){
-                                   final response = await _createProfileController.createUserProfile(
-                                      cusName: _cusNameController.text.trim(),
-                                      cusAdd: _cusAddController.text.trim(),
-                                      cusCity: _cusCityController.text.trim(),
-                                      cusState: _cusStateController.text.trim(),
-                                      cusPostcode: _cusPostcodeController.text.trim(),
-                                      cusCountry: _cusCountryController.text.trim(),
-                                      cusPhone: _cusPhoneController.text.trim(),
-                                      cusFax: _cusFaxController.text.trim(),
-                                      shipName: _shipNameController.text.trim(),
-                                      shipAdd: _shipAddController.text.trim(),
-                                      shipCity: _shipCityController.text.trim(),
-                                      shipState: _shipStateController.text.trim(),
-                                      shipPostcode: _shipPostcodeController.text.trim(),
-                                      shipCountry: _shipCountryController.text.trim(),
-                                      shipPhone: _shipPhoneController.text.trim(),
+                    GetBuilder<CreateProfileController>(
+                      builder: (_createProfileController) {
+                        return SizedBox(
+                          width: 230,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                             if(_formKey.currentState!.validate()){
+                               final response = await _createProfileController.createUserProfile(
+                                  cusName: _cusNameController.text.trim(),
+                                  cusAdd: _cusAddController.text.trim(),
+                                  cusCity: _cusCityController.text.trim(),
+                                  cusState: _cusStateController.text.trim(),
+                                  cusPostcode: _cusPostcodeController.text.trim(),
+                                  cusCountry: _cusCountryController.text.trim(),
+                                  cusPhone: _cusPhoneController.text.trim(),
+                                  cusFax: _cusFaxController.text.trim(),
+                                  shipName: _shipNameController.text.trim(),
+                                  shipAdd: _shipAddController.text.trim(),
+                                  shipCity: _shipCityController.text.trim(),
+                                  shipState: _shipStateController.text.trim(),
+                                  shipPostcode: _shipPostcodeController.text.trim(),
+                                  shipCountry: _shipCountryController.text.trim(),
+                                  shipPhone: _shipPhoneController.text.trim(),
+                               );
+                          if(response == true){
+                            if(mounted){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    "Succesully update profile",
+                                  ),
+                                ),
+                              );
+                            }
+                                 Get.to(()=> const MainBottomNavScreen());
+                               } else{
+                                 if(mounted){
+                                   ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                       content: Text(
+                                         _createProfileController.errorMessage,
+                                       ),
+                                     ),
                                    );
-                              if(response == true){
-                                if(mounted){
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        "Succesully update profile",
-                                      ),
-                                    ),
-                                  );
-                                }
-                                     Get.to(()=> const MainBottomNavScreen());
-                                   } else{
-                                     if(mounted){
-                                       ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                           content: Text(
-                                             _createProfileController.errorMessage,
-                                           ),
-                                         ),
-                                       );
-                                     }
-                                   }
-
                                  }
-                                },
-                                child: _createProfileController.isCreateProfileInProgress ?
-                                const CircularButtonWidget(textTitle: "Please wait")
-                                    : const Text("Update Profile"),
-                              ),
-                            );
-                          }
-                        ),
-                        const Spacer(),
-                        SizedBox(
-                          width: 120,
-                          child: OutlinedButton(
-                            onPressed: (){
-                            Get.to(()=> const InvoiceListScreen());
-                          }, child: const Text("Invoice List"),),
-                        ),
-                      ],
+                               }
+
+                             }
+                            },
+                            child: _createProfileController.isCreateProfileInProgress ?
+                            const CircularButtonWidget(textTitle: "Please wait")
+                                : const Text("Update Profile"),
+                          ),
+                        );
+                      }
+                    ),
+                    const SizedBox(height: 8.0,),
+                    SizedBox(
+                      width: 120,
+                      child: OutlinedButton(
+                        onPressed: (){
+                        Get.to(()=> const InvoiceListScreen());
+                      }, child: const Text("Invoice List"),),
                     ),
                   ],
                 ),

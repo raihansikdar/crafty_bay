@@ -6,7 +6,7 @@ import 'package:crafty_bay/presentation/state_holders/auth_controller/read_profi
 import 'package:crafty_bay/presentation/state_holders/carousel_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/create_product_review_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller/create_product_review_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/delete_cart_list_product_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';

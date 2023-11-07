@@ -109,221 +109,263 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextFormField(
-                onChanged: (String value){
-                  if (value.isNotEmpty) {
-                    _changeText = true;
-                  } else {
-                    _changeText = false;
-                  }
-                  setState(() {});
-                },
-                controller: _searchController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey.shade200,
-                  prefixIcon: const Icon(Icons.search),
-                  hintText: "Search",
-                  hintStyle: const TextStyle(color:Colors.grey),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder:  const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder:  const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                    suffixIcon: InkWell(
-                      onTap: () {
-                          _searchController.clear();
-                          _changeText = false;
-                          setState(() {});
-                      },
-                      child: SizedBox(
-                        width: 24.0,
-                        height: 24.0,
-                        child: Center(
-                          child: _changeText ? const Icon(Icons.close, size: 20,) : null,
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          Get.find<CarouselSliderController>().getCarouselSlider();
+          Get.find<CategoryController>().getCategory();
+          Get.find<PopularProductController>().getPopularProduct();
+          Get.find<SpecialProductController>().getSpecialProduct();
+          Get.find<NewProductController>().getNewProduct();
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                TextFormField(
+                  onChanged: (String value){
+                    if (value.isNotEmpty) {
+                      _changeText = true;
+                    } else {
+                      _changeText = false;
+                    }
+                    setState(() {});
+                  },
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                    prefixIcon: const Icon(Icons.search),
+                    hintText: "Search",
+                    hintStyle: const TextStyle(color:Colors.grey),
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder:  const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder:  const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                            _searchController.clear();
+                            _changeText = false;
+                            setState(() {});
+                        },
+                        child: SizedBox(
+                          width: 24.0,
+                          height: 24.0,
+                          child: Center(
+                            child: _changeText ? const Icon(Icons.close, size: 20,) : null,
+                          ),
                         ),
-                      ),
 
-                    )
+                      )
 
 
+                  ),
                 ),
-              ),
-              const SizedBox(height:16.0),
-              GetBuilder<CarouselSliderController>(
-                  builder: (_caroselSliderController) {
-                    return  _caroselSliderController.isSliderInProgress ?
-                    SizedBox(
-                      // width: 200.0,
-                      height: 180.0,
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: Opacity(
-                              opacity: 0.05,
-                              child: SvgPicture.asset(
-                                AssetsPath.craftybayLogoSVG,
-                                width: double.infinity,
-                                height: 180,
-                                fit: BoxFit.cover,
+                const SizedBox(height:16.0),
+                GetBuilder<CarouselSliderController>(
+                    builder: (_caroselSliderController) {
+                      return  _caroselSliderController.isSliderInProgress ?
+                      SizedBox(
+                        // width: 200.0,
+                        height: 180.0,
+                        child: Stack(
+                          children: [
+                            Center(
+                              child: Opacity(
+                                opacity: 0.05,
+                                child: SvgPicture.asset(
+                                  AssetsPath.craftybayLogoSVG,
+                                  width: double.infinity,
+                                  height: 180,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
-                          Shimmer.fromColors(
-                              baseColor: Colors.grey,
-                              highlightColor:Colors.black.withOpacity(0.04),
-                              period: const Duration(milliseconds: 800),
-                              direction: ShimmerDirection.ltr,
-                              child: Container(
-                                height: 180,
-                                decoration: BoxDecoration(
-                                  color: AppColors.primaryColor.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                              )
-                          ),
-                        ],
-                      ),
-                    ) : CarouselSliderWidget(
-                      carouselSliders: _caroselSliderController.sliderModel.data ?? [],
-                    );
-                  }
-              ),
-              SectionHeader(
-                title: 'All Category',
-                onTap: () {
-                  Get.find<MainBottomNavController>().changeScreen(1);
-                  // Get.to(()=> const CategoriesListScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
-                },
-              ),
-              SizedBox(
-                height: 110,
-                child: GetBuilder<CategoryController>(
-                    builder: (_categoryController) {
-                      return _categoryController.isCategoryInProgress ?
-                      ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 4,
-                        itemBuilder: (context,index){
-                          return SizedBox(
-                            width: 80,
-                            height: 120,
-                            child: Stack(
-                              children: [
-                                Center(
-                                  child: Opacity(
-                                    opacity: 0.09,
-                                    child: FittedBox(
-                                      child: Center(
-                                        child: SvgPicture.asset(
-                                          AssetsPath.craftybayLogoSVG,
-                                          width: 80,
-                                          height: 50,
-                                          fit: BoxFit.cover,
+                            Shimmer.fromColors(
+                                baseColor: Colors.grey,
+                                highlightColor:Colors.black.withOpacity(0.04),
+                                period: const Duration(milliseconds: 800),
+                                direction: ShimmerDirection.ltr,
+                                child: Container(
+                                  height: 180,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primaryColor.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                )
+                            ),
+                          ],
+                        ),
+                      ) : CarouselSliderWidget(
+                        carouselSliders: _caroselSliderController.sliderModel.data ?? [],
+                      );
+                    }
+                ),
+                SectionHeader(
+                  title: 'All Category',
+                  onTap: () {
+                    Get.find<MainBottomNavController>().changeScreen(1);
+                    // Get.to(()=> const CategoriesListScreen(),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
+                  },
+                ),
+                SizedBox(
+                  height: 110,
+                  child: GetBuilder<CategoryController>(
+                      builder: (_categoryController) {
+                        return _categoryController.isCategoryInProgress ?
+                        ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 4,
+                          itemBuilder: (context,index){
+                            return SizedBox(
+                              width: 80,
+                              height: 120,
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: Opacity(
+                                      opacity: 0.09,
+                                      child: FittedBox(
+                                        child: Center(
+                                          child: SvgPicture.asset(
+                                            AssetsPath.craftybayLogoSVG,
+                                            width: 80,
+                                            height: 50,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Shimmer.fromColors(
-                                    baseColor: Colors.grey,
-                                    highlightColor:
-                                    Colors.black.withOpacity(0.04),
-                                    period: const Duration(milliseconds: 800),
-                                    direction: ShimmerDirection.ltr,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 80,
-                                          width: 80,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.primaryColor.withOpacity(0.2),
-                                            borderRadius:
-                                            BorderRadius.circular(16.0),
+                                  Shimmer.fromColors(
+                                      baseColor: Colors.grey,
+                                      highlightColor:
+                                      Colors.black.withOpacity(0.04),
+                                      period: const Duration(milliseconds: 800),
+                                      direction: ShimmerDirection.ltr,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 80,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.primaryColor.withOpacity(0.2),
+                                              borderRadius:
+                                              BorderRadius.circular(16.0),
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 8.0,
-                                        ),
-                                        Container(
-                                          height: 20,
-                                          width: 80,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.primaryColor.withOpacity(0.2),
-                                            borderRadius:
-                                            BorderRadius.circular(16.0),
+                                          const SizedBox(
+                                            height: 8.0,
                                           ),
-                                        ),
+                                          Container(
+                                            height: 20,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.primaryColor.withOpacity(0.2),
+                                              borderRadius:
+                                              BorderRadius.circular(16.0),
+                                            ),
+                                          ),
 
-                                      ],
-                                    )
-                                ),
-                              ],
-                            ),
-                          );
-                        }, separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(
-                          width: 16.0,
-                        );
-                      },)
-
-                          : ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: getLength(_categoryController.categoryModel.data?.length ?? 0),
-                        itemBuilder: (context, index) {
-                          return CategoryCard(
-                            image: _categoryController.categoryModel.data?[index].categoryImg ?? '',
-                            categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',
-                            onTab: () {
-                              Get.to(()=> ProductListScreen(categoryId: _categoryController.categoryModel.data![index].id!, categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',));
-                            },
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
+                                        ],
+                                      )
+                                  ),
+                                ],
+                              ),
+                            );
+                          }, separatorBuilder: (BuildContext context, int index) {
                           return const SizedBox(
                             width: 16.0,
                           );
-                        },
+                        },)
+
+                            : ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: getLength(_categoryController.categoryModel.data?.length ?? 0),
+                          itemBuilder: (context, index) {
+                            return CategoryCard(
+                              image: _categoryController.categoryModel.data?[index].categoryImg ?? '',
+                              categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',
+                              onTab: () {
+                                Get.to(()=> ProductListScreen(categoryId: _categoryController.categoryModel.data![index].id!, categoryName: _categoryController.categoryModel.data?[index].categoryName ?? '',));
+                              },
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(
+                              width: 16.0,
+                            );
+                          },
+                        );
+                      }
+                  ),
+                ),
+
+                SectionHeader(
+                  title: 'Popular',
+                  onTap: () {
+                    Get.to(()=> ProductListScreen(productModel: Get.find<PopularProductController>().popularProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                  },
+                ),
+                GetBuilder<PopularProductController>(
+                    builder: (_popularProductController) {
+                      return SizedBox(
+                        height: 170,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: getLength(_popularProductController.popularProductModel.data?.length ?? 4),
+                          itemBuilder: (context, index) {
+                            return _popularProductController.isPopularInProgress
+                                ? const ShimmerCard()
+                                :  ProductCard(
+                              image: _popularProductController.popularProductModel.data?[index].image ?? '',
+                              title: _popularProductController.popularProductModel.data?[index].title ?? '',
+                              price: _popularProductController.popularProductModel.data?[index].price ?? '',
+                              rating: (_popularProductController.popularProductModel.data?[index].star)?.toInt() ?? 0,
+                              onTap: () {
+                              Get.to(()=> ProductDetailsScreen(productId: _popularProductController.popularProductModel.data?[index].id ?? 0,),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
+                            },
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(
+                              width: 8.0,
+                            );
+                          },
+                        ),
                       );
                     }
                 ),
-              ),
 
-              SectionHeader(
-                title: 'Popular',
-                onTap: () {
-                  Get.to(()=> ProductListScreen(productModel: Get.find<PopularProductController>().popularProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
-                },
-              ),
-              GetBuilder<PopularProductController>(
-                  builder: (_popularProductController) {
+                SectionHeader(
+                  title: 'Special',
+                  onTap: () {
+                    Get.to(()=> ProductListScreen(productModel: Get.find<SpecialProductController>().specialProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                  },
+                ),
+                GetBuilder<SpecialProductController>(
+                  builder: (_specialProductController) {
                     return SizedBox(
                       height: 170,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        itemCount: getLength(_popularProductController.popularProductModel.data?.length ?? 4),
+                        itemCount: getLength(_specialProductController.specialProductModel.data?.length ?? 4),
                         itemBuilder: (context, index) {
-                          return _popularProductController.isPopularInProgress
-                              ? const ShimmerCard()
-                              :  ProductCard(
-                            image: _popularProductController.popularProductModel.data?[index].image ?? '',
-                            title: _popularProductController.popularProductModel.data?[index].title ?? '',
-                            price: _popularProductController.popularProductModel.data?[index].price ?? '',
-                            rating: (_popularProductController.popularProductModel.data?[index].star)?.toInt() ?? 0,
-                            onTap: () {
-                            Get.to(()=> ProductDetailsScreen(productId: _popularProductController.popularProductModel.data?[index].id ?? 0,),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
-                          },
-                          );
-                        },
+                        return _specialProductController.isSpecialInProgress ? const ShimmerCard() : ProductCard(
+                          image: _specialProductController.specialProductModel.data?[index].image ?? '',
+                          title: _specialProductController.specialProductModel.data?[index].title ?? '',
+                          price: _specialProductController.specialProductModel.data?[index].price ?? '',
+                          rating: (_specialProductController.specialProductModel.data?[index].star ?? 0).toInt(),
+                          onTap: () {
+                                  Get.to(() =>  ProductDetailsScreen(productId: _specialProductController.specialProductModel.data?[index].id ?? 0), transition: PageChangingAnimation.sendTransition, duration: PageChangingAnimation.duration);
+                                },
+                              );
+                      },
                         separatorBuilder: (BuildContext context, int index) {
                           return const SizedBox(
                             width: 8.0,
@@ -332,75 +374,42 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   }
-              ),
+                ),
 
-              SectionHeader(
-                title: 'Special',
-                onTap: () {
-                  Get.to(()=> ProductListScreen(productModel: Get.find<SpecialProductController>().specialProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
-                },
-              ),
-              GetBuilder<SpecialProductController>(
-                builder: (_specialProductController) {
-                  return SizedBox(
-                    height: 170,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: getLength(_specialProductController.specialProductModel.data?.length ?? 4),
-                      itemBuilder: (context, index) {
-                      return _specialProductController.isSpecialInProgress ? const ShimmerCard() : ProductCard(
-                        image: _specialProductController.specialProductModel.data?[index].image ?? '',
-                        title: _specialProductController.specialProductModel.data?[index].title ?? '',
-                        price: _specialProductController.specialProductModel.data?[index].price ?? '',
-                        rating: (_specialProductController.specialProductModel.data?[index].star ?? 0).toInt(),
-                        onTap: () {
-                                Get.to(() =>  ProductDetailsScreen(productId: _specialProductController.specialProductModel.data?[index].id ?? 0), transition: PageChangingAnimation.sendTransition, duration: PageChangingAnimation.duration);
-                              },
-                            );
-                    },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(
-                          width: 8.0,
+                SectionHeader(
+                  title: 'New',
+                  onTap: () {
+                    Get.to(()=> ProductListScreen(productModel: Get.find<NewProductController>().newProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
+                  },
+                ),
+                GetBuilder<NewProductController>(
+                  builder: (_newProductController) {
+                    return SizedBox(
+                      height: 170,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: getLength(_newProductController.newProductModel.data?.length ?? 4),
+                        itemBuilder: (context, index) {
+                        return _newProductController.isNewInProgress ? const ShimmerCard() : ProductCard(
+                          image: _newProductController.newProductModel.data?[index].image ?? '',
+                          title: _newProductController.newProductModel.data?[index].title ?? '',
+                          price: _newProductController.newProductModel.data?[index].price ?? '',
+                          rating: (_newProductController.newProductModel.data?[index].star ?? 0).toInt(), onTap: () {
+                          Get.to(()=> ProductDetailsScreen(productId: _newProductController.newProductModel.data?[index].id ?? 0,),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
+                        },
                         );
                       },
-                    ),
-                  );
-                }
-              ),
-
-              SectionHeader(
-                title: 'New',
-                onTap: () {
-                  Get.to(()=> ProductListScreen(productModel: Get.find<NewProductController>().newProductModel,),transition: PageChangingAnimation.sendTransition,duration:PageChangingAnimation.duration);
-                },
-              ),
-              GetBuilder<NewProductController>(
-                builder: (_newProductController) {
-                  return SizedBox(
-                    height: 170,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: getLength(_newProductController.newProductModel.data?.length ?? 4),
-                      itemBuilder: (context, index) {
-                      return _newProductController.isNewInProgress ? const ShimmerCard() : ProductCard(
-                        image: _newProductController.newProductModel.data?[index].image ?? '',
-                        title: _newProductController.newProductModel.data?[index].title ?? '',
-                        price: _newProductController.newProductModel.data?[index].price ?? '',
-                        rating: (_newProductController.newProductModel.data?[index].star ?? 0).toInt(), onTap: () {
-                        Get.to(()=> ProductDetailsScreen(productId: _newProductController.newProductModel.data?[index].id ?? 0,),transition: PageChangingAnimation.sendTransition,duration: PageChangingAnimation.duration);
-                      },
-                      );
-                    },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(
-                          width: 8.0,
-                        );
-                      },
-                    ),
-                  );
-                }
-              ),
-            ],
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(
+                            width: 8.0,
+                          );
+                        },
+                      ),
+                    );
+                  }
+                ),
+              ],
+            ),
           ),
         ),
       ),

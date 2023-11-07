@@ -30,6 +30,11 @@ class _InvoiceListScreenState extends State<InvoiceListScreen> {
         padding: const EdgeInsets.all(8.0),
         child: GetBuilder<InvoiceListController>(
           builder: (_invoiceListController) {
+            if(_invoiceListController.isInvoiceListInProgress){
+              return Center(child: CircularProgressIndicator());
+            }else if(_invoiceListController.invoiceList != null && _invoiceListController.invoiceList.isEmpty){
+              return Center(child: Text("Empty"));
+            }
             return ListView.separated(
               itemCount: _invoiceListController.invoiceList.length,
                 itemBuilder: (context,index){

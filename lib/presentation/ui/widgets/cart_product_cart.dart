@@ -76,7 +76,12 @@ class CartProductCard extends StatelessWidget {
                                     ),
                                     children: [
                                       TextSpan(text: 'Color: ${cartData.color ?? ''}'),
-                                      TextSpan(text: '${cartData.size ?? ''}'),
+                                  WidgetSpan(
+                                    child: SizedBox(
+                                      width: 8.0,
+                                    ),
+                                  ),
+                                  TextSpan(text: 'Size : ${cartData.size ?? ''}'),
                                     ]
                                 ))
                               ],

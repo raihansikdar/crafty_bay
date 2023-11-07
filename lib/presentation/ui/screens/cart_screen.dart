@@ -55,9 +55,17 @@ class _CartScreenState extends State<CartScreen> {
         }
         if (_cartListController.cartListModel.data != null &&
             _cartListController.cartListModel.data!.isEmpty) {
-          return const Center(
-            child: Text('Cart is empty!'),
-          );
+          return Center(child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/images/error.gif",
+                height: 60,
+                width: 60,
+              ),
+              Text("Cart List is Empty"),
+            ],
+          ));
         }
         return Column(
           children: [
