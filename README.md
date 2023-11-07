@@ -73,6 +73,8 @@ CraftyBay is continuously evolving to enhance the shopping experience for users,
  <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/19.jpg" width="200" />
  <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/20.jpg" width="200" />
  <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/21.jpg" width="200" />
+ <img src="https://github.com/raihansikdar/crafty_bay/blob/main/screenshots/23.jpg" width="200" />
+
  
 
 </div>
