@@ -83,6 +83,12 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
                                           fontWeight: FontWeight.w600,
                                           color: Colors.grey),
                                     ),
+                                    Spacer(),
+                                    const Icon(
+                                      Icons.star,
+                                      size: 18,
+                                      color: Colors.amber,
+                                    ),
                                     Text(
                                       _productReviewController.productReviewModel.data?.first.rating ?? '',
                                       style: const TextStyle(
