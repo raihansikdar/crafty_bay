@@ -115,6 +115,8 @@ The CraftyBay directory structure is organized as follows:
 │   └── images/
 │       ├── cadre_black_logo.svg
 │       ├── cadre_white_logo.svg
+│       ├── error.gif
+│       ├── logo.png
 │       ├── logo.svg
 │       ├── logo_nav.svg
 │       └── shoe.png
@@ -160,8 +162,10 @@ The CraftyBay directory structure is organized as follows:
     │   │   │   ├── otp_verification_controller.dart
     │   │   │   └── read_profile_controller.dart
     │   │   ├── payment_controller/
-    │   │   │   └── create_invoice_controller.dart
+    │   │   │   ├── create_invoice_controller.dart
+    │   │   │   └── invoice_list_controller.dart
     │   │   ├── product_controller/
+    │   │   │   ├── create_product_review_controller.dart
     │   │   │   ├── new_product_controller.dart
     │   │   │   ├── propular_product_controller.dart
     │   │   │   ├── product_details_controller.dart
@@ -172,7 +176,6 @@ The CraftyBay directory structure is organized as follows:
     │   │   ├── carosuel_slider_controller.dart
     │   │   ├── cart_list_controller.dart
     │   │   ├── category_controller.dart
-    │   │   ├── create_product_review_controller.dart
     │   │   ├── create_wish_list_controller.dart
     │   │   ├── delete_cart_list_product_controller.dart
     │   │   ├── main_bottom_nav_controller.dart
@@ -188,6 +191,7 @@ The CraftyBay directory structure is organized as follows:
     │       │   │   └── read_profile_screen.dart
     │       │   ├── payment/
     │       │   │   ├── checkout_screen.dart
+    │       │   │   ├── invoice_list_screen.dart
     │       │   │   └── web_view_screen.dart
     │       │   ├── cart_screen.dart
     │       │   ├── categories_list_screen.dart
